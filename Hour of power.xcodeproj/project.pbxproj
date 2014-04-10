@@ -1,0 +1,491 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FCC5F95818F6A515007F5A62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F95718F6A515007F5A62 /* Foundation.framework */; };
+		FCC5F95A18F6A515007F5A62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F95918F6A515007F5A62 /* CoreGraphics.framework */; };
+		FCC5F95C18F6A515007F5A62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F95B18F6A515007F5A62 /* UIKit.framework */; };
+		FCC5F96218F6A515007F5A62 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FCC5F96018F6A515007F5A62 /* InfoPlist.strings */; };
+		FCC5F96418F6A515007F5A62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5F96318F6A515007F5A62 /* main.m */; };
+		FCC5F96818F6A515007F5A62 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5F96718F6A515007F5A62 /* AppDelegate.m */; };
+		FCC5F96B18F6A515007F5A62 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC5F96918F6A515007F5A62 /* Main_iPhone.storyboard */; };
+		FCC5F96E18F6A515007F5A62 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC5F96C18F6A515007F5A62 /* Main_iPad.storyboard */; };
+		FCC5F97118F6A515007F5A62 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5F97018F6A515007F5A62 /* FirstViewController.m */; };
+		FCC5F97418F6A515007F5A62 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5F97318F6A515007F5A62 /* SecondViewController.m */; };
+		FCC5F97618F6A515007F5A62 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC5F97518F6A515007F5A62 /* Images.xcassets */; };
+		FCC5F97D18F6A515007F5A62 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F97C18F6A515007F5A62 /* XCTest.framework */; };
+		FCC5F97E18F6A515007F5A62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F95718F6A515007F5A62 /* Foundation.framework */; };
+		FCC5F97F18F6A515007F5A62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F95B18F6A515007F5A62 /* UIKit.framework */; };
+		FCC5F98718F6A515007F5A62 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FCC5F98518F6A515007F5A62 /* InfoPlist.strings */; };
+		FCC5F98918F6A515007F5A62 /* Hour_of_powerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5F98818F6A515007F5A62 /* Hour_of_powerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FCC5F98018F6A515007F5A62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCC5F94C18F6A515007F5A62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCC5F95318F6A515007F5A62;
+			remoteInfo = "Hour of power";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FCC5F95418F6A515007F5A62 /* Hour of power.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hour of power.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCC5F95718F6A515007F5A62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FCC5F95918F6A515007F5A62 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FCC5F95B18F6A515007F5A62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FCC5F95F18F6A515007F5A62 /* Hour of power-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hour of power-Info.plist"; sourceTree = "<group>"; };
+		FCC5F96118F6A515007F5A62 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FCC5F96318F6A515007F5A62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FCC5F96518F6A515007F5A62 /* Hour of power-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hour of power-Prefix.pch"; sourceTree = "<group>"; };
+		FCC5F96618F6A515007F5A62 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FCC5F96718F6A515007F5A62 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FCC5F96A18F6A515007F5A62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		FCC5F96D18F6A515007F5A62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		FCC5F96F18F6A515007F5A62 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		FCC5F97018F6A515007F5A62 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		FCC5F97218F6A515007F5A62 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		FCC5F97318F6A515007F5A62 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		FCC5F97518F6A515007F5A62 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FCC5F97B18F6A515007F5A62 /* Hour of powerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hour of powerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCC5F97C18F6A515007F5A62 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FCC5F98418F6A515007F5A62 /* Hour of powerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hour of powerTests-Info.plist"; sourceTree = "<group>"; };
+		FCC5F98618F6A515007F5A62 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FCC5F98818F6A515007F5A62 /* Hour_of_powerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Hour_of_powerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCC5F95118F6A515007F5A62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCC5F95A18F6A515007F5A62 /* CoreGraphics.framework in Frameworks */,
+				FCC5F95C18F6A515007F5A62 /* UIKit.framework in Frameworks */,
+				FCC5F95818F6A515007F5A62 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCC5F97818F6A515007F5A62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCC5F97D18F6A515007F5A62 /* XCTest.framework in Frameworks */,
+				FCC5F97F18F6A515007F5A62 /* UIKit.framework in Frameworks */,
+				FCC5F97E18F6A515007F5A62 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FCC5F94B18F6A515007F5A62 = {
+			isa = PBXGroup;
+			children = (
+				FCC5F95D18F6A515007F5A62 /* Hour of power */,
+				FCC5F98218F6A515007F5A62 /* Hour of powerTests */,
+				FCC5F95618F6A515007F5A62 /* Frameworks */,
+				FCC5F95518F6A515007F5A62 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCC5F95518F6A515007F5A62 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5F95418F6A515007F5A62 /* Hour of power.app */,
+				FCC5F97B18F6A515007F5A62 /* Hour of powerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCC5F95618F6A515007F5A62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5F95718F6A515007F5A62 /* Foundation.framework */,
+				FCC5F95918F6A515007F5A62 /* CoreGraphics.framework */,
+				FCC5F95B18F6A515007F5A62 /* UIKit.framework */,
+				FCC5F97C18F6A515007F5A62 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCC5F95D18F6A515007F5A62 /* Hour of power */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5F96618F6A515007F5A62 /* AppDelegate.h */,
+				FCC5F96718F6A515007F5A62 /* AppDelegate.m */,
+				FCC5F96918F6A515007F5A62 /* Main_iPhone.storyboard */,
+				FCC5F96C18F6A515007F5A62 /* Main_iPad.storyboard */,
+				FCC5F96F18F6A515007F5A62 /* FirstViewController.h */,
+				FCC5F97018F6A515007F5A62 /* FirstViewController.m */,
+				FCC5F97218F6A515007F5A62 /* SecondViewController.h */,
+				FCC5F97318F6A515007F5A62 /* SecondViewController.m */,
+				FCC5F97518F6A515007F5A62 /* Images.xcassets */,
+				FCC5F95E18F6A515007F5A62 /* Supporting Files */,
+			);
+			path = "Hour of power";
+			sourceTree = "<group>";
+		};
+		FCC5F95E18F6A515007F5A62 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5F95F18F6A515007F5A62 /* Hour of power-Info.plist */,
+				FCC5F96018F6A515007F5A62 /* InfoPlist.strings */,
+				FCC5F96318F6A515007F5A62 /* main.m */,
+				FCC5F96518F6A515007F5A62 /* Hour of power-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCC5F98218F6A515007F5A62 /* Hour of powerTests */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5F98818F6A515007F5A62 /* Hour_of_powerTests.m */,
+				FCC5F98318F6A515007F5A62 /* Supporting Files */,
+			);
+			path = "Hour of powerTests";
+			sourceTree = "<group>";
+		};
+		FCC5F98318F6A515007F5A62 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5F98418F6A515007F5A62 /* Hour of powerTests-Info.plist */,
+				FCC5F98518F6A515007F5A62 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FCC5F95318F6A515007F5A62 /* Hour of power */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCC5F98C18F6A515007F5A62 /* Build configuration list for PBXNativeTarget "Hour of power" */;
+			buildPhases = (
+				FCC5F95018F6A515007F5A62 /* Sources */,
+				FCC5F95118F6A515007F5A62 /* Frameworks */,
+				FCC5F95218F6A515007F5A62 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Hour of power";
+			productName = "Hour of power";
+			productReference = FCC5F95418F6A515007F5A62 /* Hour of power.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FCC5F97A18F6A515007F5A62 /* Hour of powerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCC5F98F18F6A515007F5A62 /* Build configuration list for PBXNativeTarget "Hour of powerTests" */;
+			buildPhases = (
+				FCC5F97718F6A515007F5A62 /* Sources */,
+				FCC5F97818F6A515007F5A62 /* Frameworks */,
+				FCC5F97918F6A515007F5A62 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCC5F98118F6A515007F5A62 /* PBXTargetDependency */,
+			);
+			name = "Hour of powerTests";
+			productName = "Hour of powerTests";
+			productReference = FCC5F97B18F6A515007F5A62 /* Hour of powerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCC5F94C18F6A515007F5A62 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = wigwamm;
+				TargetAttributes = {
+					FCC5F97A18F6A515007F5A62 = {
+						TestTargetID = FCC5F95318F6A515007F5A62;
+					};
+				};
+			};
+			buildConfigurationList = FCC5F94F18F6A515007F5A62 /* Build configuration list for PBXProject "Hour of power" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FCC5F94B18F6A515007F5A62;
+			productRefGroup = FCC5F95518F6A515007F5A62 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FCC5F95318F6A515007F5A62 /* Hour of power */,
+				FCC5F97A18F6A515007F5A62 /* Hour of powerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCC5F95218F6A515007F5A62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCC5F96E18F6A515007F5A62 /* Main_iPad.storyboard in Resources */,
+				FCC5F97618F6A515007F5A62 /* Images.xcassets in Resources */,
+				FCC5F96B18F6A515007F5A62 /* Main_iPhone.storyboard in Resources */,
+				FCC5F96218F6A515007F5A62 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCC5F97918F6A515007F5A62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCC5F98718F6A515007F5A62 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCC5F95018F6A515007F5A62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCC5F97418F6A515007F5A62 /* SecondViewController.m in Sources */,
+				FCC5F96818F6A515007F5A62 /* AppDelegate.m in Sources */,
+				FCC5F97118F6A515007F5A62 /* FirstViewController.m in Sources */,
+				FCC5F96418F6A515007F5A62 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCC5F97718F6A515007F5A62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCC5F98918F6A515007F5A62 /* Hour_of_powerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FCC5F98118F6A515007F5A62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCC5F95318F6A515007F5A62 /* Hour of power */;
+			targetProxy = FCC5F98018F6A515007F5A62 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FCC5F96018F6A515007F5A62 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCC5F96118F6A515007F5A62 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FCC5F96918F6A515007F5A62 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCC5F96A18F6A515007F5A62 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		FCC5F96C18F6A515007F5A62 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCC5F96D18F6A515007F5A62 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		FCC5F98518F6A515007F5A62 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCC5F98618F6A515007F5A62 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FCC5F98A18F6A515007F5A62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCC5F98B18F6A515007F5A62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FCC5F98D18F6A515007F5A62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hour of power/Hour of power-Prefix.pch";
+				INFOPLIST_FILE = "Hour of power/Hour of power-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FCC5F98E18F6A515007F5A62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hour of power/Hour of power-Prefix.pch";
+				INFOPLIST_FILE = "Hour of power/Hour of power-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FCC5F99018F6A515007F5A62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hour of power.app/Hour of power";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hour of power/Hour of power-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Hour of powerTests/Hour of powerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FCC5F99118F6A515007F5A62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hour of power.app/Hour of power";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hour of power/Hour of power-Prefix.pch";
+				INFOPLIST_FILE = "Hour of powerTests/Hour of powerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCC5F94F18F6A515007F5A62 /* Build configuration list for PBXProject "Hour of power" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCC5F98A18F6A515007F5A62 /* Debug */,
+				FCC5F98B18F6A515007F5A62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCC5F98C18F6A515007F5A62 /* Build configuration list for PBXNativeTarget "Hour of power" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCC5F98D18F6A515007F5A62 /* Debug */,
+				FCC5F98E18F6A515007F5A62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FCC5F98F18F6A515007F5A62 /* Build configuration list for PBXNativeTarget "Hour of powerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCC5F99018F6A515007F5A62 /* Debug */,
+				FCC5F99118F6A515007F5A62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FCC5F94C18F6A515007F5A62 /* Project object */;
+}
