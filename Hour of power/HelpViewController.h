@@ -10,4 +10,8 @@
 
 @interface HelpViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UISwitch *addressBookSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *facebookSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *emailSwitch;
+
 @end

@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *addressTableView;
 
+@property (strong, nonatomic) NSMutableArray *contactList;
+
 @end

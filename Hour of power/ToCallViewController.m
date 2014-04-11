@@ -21,8 +21,9 @@
     NSString *firstName;
     NSString *lastName;
     NSString *phoneNumber;
-    NSMutableArray *contactList;
 }
+
+@synthesize contactList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,14 +39,88 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self fillArray];
+    //AddressBook
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"addressBookSwitch"]) {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"addressBookSwitch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self fillTableView];
+        
+    } else {
+        
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            
+            [self fillTableView];
+            
+        } else {
+            NSLog(@"Address book sync disabled");
+        }
+    }
     
+    //Facebook
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"facebookSwitch"]) {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"facebookSwitch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    } else {
+        
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"facebookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            
+            
+        } else {
+            NSLog(@"Facebook sync disabled");
+        }
+    }
+    
+    //Email
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"emailSwitch"]) {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"emailSwitch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    } else {
+        
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"emailSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            
+            
+        } else {
+            NSLog(@"Address book sync disabled");
+        }
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        
+        [self fillTableView];
+        
+    } else {
+        
+        NSLog(@"Address book sync disabled");
+        [contactList removeAllObjects];
+        [[self addressTableView] reloadData];
+    }
+}
+
+- (void)fillTableView
+{
+    [self initArray];
     [self getAddressBookAuthorization];
 }
 
-- (void)fillArray
+- (void)initArray
 {
+    NSLog(@"Init array");
+    
     contactList = [[NSMutableArray alloc]init];
+}
+
+- (void)clearArray
+{
+    [contactList removeAllObjects];
 }
 
 - (void)getAddressBookAuthorization
@@ -102,13 +177,14 @@
         
     }
     
-    [self.addressTableView reloadData];
+    [[self addressTableView] reloadData];
 }
 
 #pragma mark - TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"Load data");
     return [contactList count];
 }
 
