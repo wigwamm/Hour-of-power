@@ -13,6 +13,7 @@
 #import <AddressBook/ABPerson.h>
 
 #import "TTCounterLabel.h"
+#import "ODRefreshControl.h"
 
 @interface ToCallViewController () <TTCounterLabelDelegate>
 {
@@ -43,6 +44,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.addressTableView];
+    [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+    
+    refreshControl.tintColor = [UIColor blackColor];
     
     //AddressBook
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"addressBookSwitch"]) {
@@ -296,6 +302,19 @@
 - (void)countdownDidEndForSource:(TTCounterLabel *)source
 {
     NSLog(@"You have run out of time!");
+}
+
+#pragma mark - ODRefreshControl
+
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+{
+    double delayInSeconds = 1.0;
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [refreshControl endRefreshing];
+    });
 }
 
 - (void)didReceiveMemoryWarning
