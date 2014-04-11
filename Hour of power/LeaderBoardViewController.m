@@ -1,18 +1,18 @@
 //
-//  ReadyToMoveViewController.m
+//  LeaderBoardViewController.m
 //  Hour of power
 //
-//  Created by Simone Ferrini on 10/04/14.
+//  Created by Simone Ferrini on 11/04/14.
 //  Copyright (c) 2014 wigwamm. All rights reserved.
 //
 
-#import "ReadyToMoveViewController.h"
+#import "LeaderBoardViewController.h"
 
-@interface ReadyToMoveViewController ()
+@interface LeaderBoardViewController ()
 
 @end
 
-@implementation ReadyToMoveViewController
+@implementation LeaderBoardViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning

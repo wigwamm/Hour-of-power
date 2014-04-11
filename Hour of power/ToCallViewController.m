@@ -12,7 +12,12 @@
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBook/ABPerson.h>
 
-@interface ToCallViewController ()
+#import "TTCounterLabel.h"
+
+@interface ToCallViewController () <TTCounterLabelDelegate>
+{
+    IBOutlet TTCounterLabel *_counterLabel;
+}
 
 @end
 
@@ -89,6 +94,9 @@
             NSLog(@"Address book sync disabled");
         }
     }
+    
+    //CountDown
+    [self initCountDown];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -154,12 +162,37 @@
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
     
+//    for(int i = 0; i < numberOfPeople; i++) {
+//        
+//        ABRecordRef person = CFArrayGetValueAtIndex( allPeople, i );
+//        
+//        firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+//        lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+//        NSLog(@"Name:%@ %@", firstName, lastName);
+//        
+//        ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+//        
+//        for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
+//            phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+//            NSLog(@"phone:%@", phoneNumber);
+//        }
+//        
+//        //Fill array contactList
+//        NSString *fullContact = [NSString stringWithFormat:@"%@ %@ : %@", firstName, lastName, phoneNumber];
+//        [contactList addObject:fullContact];
+//        
+//        NSLog(@"=============================================");
+//        
+//    }
+    
+    
     for(int i = 0; i < numberOfPeople; i++) {
         
         ABRecordRef person = CFArrayGetValueAtIndex( allPeople, i );
         
         firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
         lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+        
         NSLog(@"Name:%@ %@", firstName, lastName);
         
         ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
@@ -169,6 +202,31 @@
             NSLog(@"phone:%@", phoneNumber);
         }
         
+        
+        //Facebook
+        ABMultiValueRef profile = ABRecordCopyValue(person,  kABPersonInstantMessageProperty);
+        if (ABMultiValueGetCount(profile) > 0) {
+            
+            // collect all emails in array
+            
+            for (CFIndex i = 0; i < ABMultiValueGetCount(profile); i++) {
+                NSDictionary *socialItem = (__bridge NSDictionary*)ABMultiValueCopyValueAtIndex(profile, i);
+                NSString* SocialLabel =  [socialItem objectForKey:(NSString *)kABPersonInstantMessageServiceKey];
+                
+                if([SocialLabel isEqualToString:(NSString *)kABPersonInstantMessageServiceFacebook]) {
+                    
+                    NSString *facebookProfile = ([socialItem objectForKey:(NSString *)kABPersonInstantMessageUsernameKey]);
+                    NSLog(@"fbName %@", facebookProfile);
+                }
+            }
+            CFRelease(profile);
+        }
+        //--------
+        
+        
+        
+        
+        
         //Fill array contactList
         NSString *fullContact = [NSString stringWithFormat:@"%@ %@ : %@", firstName, lastName, phoneNumber];
         [contactList addObject:fullContact];
@@ -176,6 +234,8 @@
         NSLog(@"=============================================");
         
     }
+    
+    
     
     [[self addressTableView] reloadData];
 }
@@ -205,6 +265,37 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - CountDown
+
+- (void)initCountDown
+{
+    _counterLabel.countDirection = kCountDirectionDown;
+    
+    [_counterLabel setStartValue:600000*6];
+    
+    _counterLabel.countdownDelegate = self;
+    
+    
+    [_counterLabel setBoldFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:30]];
+    [_counterLabel setRegularFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:30]];
+    [_counterLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20]];
+    
+//    _counterLabel.textColor = [UIColor darkGrayColor];
+    
+    [_counterLabel updateApperance];
+    
+    [_counterLabel start];
+    
+//    [_counterLabel reset];
+}
+
+#pragma mark - TTCounterLabelDelegate
+
+- (void)countdownDidEndForSource:(TTCounterLabel *)source
+{
+    NSLog(@"You have run out of time!");
 }
 
 - (void)didReceiveMemoryWarning
