@@ -8,6 +8,8 @@
 
 #import "ToCallViewController.h"
 
+#import "DetailToCallViewController.h"
+
 #import <AddressBook/AddressBook.h>
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBook/ABPerson.h>
@@ -27,6 +29,8 @@
     NSString *firstName;
     NSString *lastName;
     NSString *phoneNumber;
+    
+    NSString *fullName;
 }
 
 @synthesize contactList;
@@ -234,7 +238,8 @@
         
         
         //Fill array contactList
-        NSString *fullContact = [NSString stringWithFormat:@"%@ %@ : %@", firstName, lastName, phoneNumber];
+//        NSString *fullContact = [NSString stringWithFormat:@"%@ %@ : %@", firstName, lastName, phoneNumber];
+        NSString *fullContact = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         [contactList addObject:fullContact];
         
         NSLog(@"=============================================");
@@ -271,6 +276,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UITableViewCell *cellSelected = [tableView cellForRowAtIndexPath:indexPath];
+    
+    fullName = cellSelected.textLabel.text;
+    
+    UIStoryboardSegue *segue = [[UIStoryboardSegue alloc] initWithIdentifier:@"segue" source:self destination:[[DetailToCallViewController alloc] init]];
+    
+    [self prepareForSegue:segue sender:self];
 }
 
 #pragma mark - CountDown
@@ -323,7 +336,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -331,7 +343,17 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"segue"])
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        DetailToCallViewController *yourViewController = (DetailToCallViewController *)[storyboard instantiateViewControllerWithIdentifier:@"DetailToCallViewController"];
+        
+        yourViewController.fullName = fullName;
+        yourViewController.phoneNumber = phoneNumber;
+        
+        [self.navigationController pushViewController:yourViewController animated:YES];
+    }
 }
-*/
 
 @end
