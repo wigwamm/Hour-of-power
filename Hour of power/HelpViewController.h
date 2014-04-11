@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  HelpViewController.h
 //  Hour of power
 //
 //  Created by Simone Ferrini on 10/04/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface HelpViewController : UIViewController
 
 @end
