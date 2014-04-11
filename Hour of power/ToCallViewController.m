@@ -31,6 +31,8 @@
     NSString *phoneNumber;
     
     NSString *fullName;
+    NSMutableArray *phoneNumbersArray;
+    NSString *phoneNumberSelected;
 }
 
 @synthesize contactList;
@@ -134,6 +136,7 @@
     NSLog(@"Init array");
     
     contactList = [[NSMutableArray alloc]init];
+    phoneNumbersArray = [[NSMutableArray alloc]init];
 }
 
 - (void)clearArray
@@ -210,6 +213,8 @@
         for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
             phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, i);
             NSLog(@"phone:%@", phoneNumber);
+            
+            [phoneNumbersArray addObject:phoneNumber];
         }
         
         
@@ -280,6 +285,7 @@
     UITableViewCell *cellSelected = [tableView cellForRowAtIndexPath:indexPath];
     
     fullName = cellSelected.textLabel.text;
+    phoneNumberSelected = [phoneNumbersArray objectAtIndex:indexPath.row];
     
     UIStoryboardSegue *segue = [[UIStoryboardSegue alloc] initWithIdentifier:@"segue" source:self destination:[[DetailToCallViewController alloc] init]];
     
@@ -350,7 +356,7 @@
         DetailToCallViewController *yourViewController = (DetailToCallViewController *)[storyboard instantiateViewControllerWithIdentifier:@"DetailToCallViewController"];
         
         yourViewController.fullName = fullName;
-        yourViewController.phoneNumber = phoneNumber;
+        yourViewController.phoneNumber = [NSString stringWithFormat:@"Number: %@", phoneNumberSelected];
         
         [self.navigationController pushViewController:yourViewController animated:YES];
     }
