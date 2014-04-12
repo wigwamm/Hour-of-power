@@ -32,6 +32,13 @@
     self.phoneNumberLabel.text = self.phoneNumber;
 }
 
+- (IBAction)callNumber:(id)sender
+{
+    //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:444"]];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt:444"]];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

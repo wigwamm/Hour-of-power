@@ -94,6 +94,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5d-K9-xdY">
+                                <rect key="frame" x="254" y="84" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Call">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="callNumber:" destination="W12-BN-LZ6" eventType="touchUpInside" id="9Hj-wQ-1N7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -182,7 +192,7 @@
             </objects>
             <point key="canvasLocation" x="218" y="350"/>
         </scene>
-        <!--Leader Board View Controller - ...-->
+        <!--Leader Board View Controller - LeaderBoard-->
         <scene sceneID="Dpe-m9-C9h">
             <objects>
                 <viewController id="evi-4c-j6G" customClass="LeaderBoardViewController" sceneMemberID="viewController">
@@ -204,7 +214,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="..." image="first" id="5sq-Rd-iA8"/>
+                    <tabBarItem key="tabBarItem" title="LeaderBoard" image="first" id="5sq-Rd-iA8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RH7-JZ-xZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
