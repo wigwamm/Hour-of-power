@@ -239,9 +239,6 @@
         //--------
         
         
-        
-        
-        
         //Fill array contactList
 //        NSString *fullContact = [NSString stringWithFormat:@"%@ %@ : %@", firstName, lastName, phoneNumber];
         NSString *fullContact = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
@@ -356,7 +353,7 @@
         DetailToCallViewController *yourViewController = (DetailToCallViewController *)[storyboard instantiateViewControllerWithIdentifier:@"DetailToCallViewController"];
         
         yourViewController.fullName = fullName;
-        yourViewController.phoneNumber = [NSString stringWithFormat:@"Number: %@", phoneNumberSelected];
+        yourViewController.phoneNumber = [NSString stringWithFormat:@"%@", phoneNumberSelected];
         
         [self.navigationController pushViewController:yourViewController animated:YES];
     }

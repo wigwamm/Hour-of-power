@@ -36,7 +36,9 @@
 {
     //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:444"]];
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt:444"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",[self.phoneNumber
+                                                                                                                stringByReplacingOccurrencesOfString:@" "
+                                                                                                                withString:@""]]]];
 }
 
 - (void)didReceiveMemoryWarning
