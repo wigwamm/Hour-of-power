@@ -17,6 +17,8 @@
 #import "TTCounterLabel.h"
 #import "ODRefreshControl.h"
 
+#import "Contact.h"
+
 @interface ToCallViewController () <TTCounterLabelDelegate>
 {
     IBOutlet TTCounterLabel *_counterLabel;
@@ -36,6 +38,7 @@
 }
 
 @synthesize contactList;
+@synthesize fetchedResultsController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,72 +59,36 @@
     
     refreshControl.tintColor = [UIColor blackColor];
     
-    //AddressBook
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"addressBookSwitch"]) {
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"addressBookSwitch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
         [self fillTableView];
-        
     } else {
-        
-        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            
-            [self fillTableView];
-            
-        } else {
-            NSLog(@"Address book sync disabled");
-        }
-    }
-    
-    //Facebook
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"facebookSwitch"]) {
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"facebookSwitch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-    } else {
-        
-        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"facebookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            
-            
-        } else {
-            NSLog(@"Facebook sync disabled");
-        }
-    }
-    
-    //Email
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"emailSwitch"]) {
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"emailSwitch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-    } else {
-        
-        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"emailSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            
-            
-        } else {
-            NSLog(@"Address book sync disabled");
-        }
+        NSLog(@"Address book sync disabled");
+        [contactList removeAllObjects];
+        [[self addressTableView] reloadData];
     }
     
     //CountDown
     [self initCountDown];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
-        
+    //AddressBook
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"addressBookSwitch"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"addressBookSwitch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self fillTableView];
-        
     } else {
-        
-        NSLog(@"Address book sync disabled");
-        [contactList removeAllObjects];
-        [[self addressTableView] reloadData];
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            [self fillTableView];
+        } else {
+            NSLog(@"Address book sync disabled");
+        }
     }
 }
 
@@ -175,28 +142,28 @@
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
     
-//    for(int i = 0; i < numberOfPeople; i++) {
-//        
-//        ABRecordRef person = CFArrayGetValueAtIndex( allPeople, i );
-//        
-//        firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-//        lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-//        NSLog(@"Name:%@ %@", firstName, lastName);
-//        
-//        ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
-//        
-//        for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
-//            phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, i);
-//            NSLog(@"phone:%@", phoneNumber);
-//        }
-//        
-//        //Fill array contactList
-//        NSString *fullContact = [NSString stringWithFormat:@"%@ %@ : %@", firstName, lastName, phoneNumber];
-//        [contactList addObject:fullContact];
-//        
-//        NSLog(@"=============================================");
-//        
-//    }
+    //    for(int i = 0; i < numberOfPeople; i++) {
+    //
+    //        ABRecordRef person = CFArrayGetValueAtIndex( allPeople, i );
+    //
+    //        firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+    //        lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+    //        NSLog(@"Name:%@ %@", firstName, lastName);
+    //
+    //        ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    //
+    //        for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
+    //            phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+    //            NSLog(@"phone:%@", phoneNumber);
+    //        }
+    //
+    //        //Fill array contactList
+    //        NSString *fullContact = [NSString stringWithFormat:@"%@ %@ : %@", firstName, lastName, phoneNumber];
+    //        [contactList addObject:fullContact];
+    //
+    //        NSLog(@"=============================================");
+    //
+    //    }
     
     
     for(int i = 0; i < numberOfPeople; i++) {
@@ -261,6 +228,19 @@
     return [contactList count];
 }
 
+- (void)btnCommentClick:(id)sender
+{
+    UIButton *senderButton = (UIButton *)sender;
+    NSLog(@"current Row = %d",senderButton.tag);
+    //NSIndexPath *path = [NSIndexPath indexPathForRow:senderButton.tag inSection:0];
+    
+    //    NSString *number = phoneNumbersArray[senderButton.tag];
+    //
+    //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",[number
+    //                                                                                                                stringByReplacingOccurrencesOfString:@" "
+    //                                                                                                                withString:@""]]]];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TableCell"];
@@ -272,6 +252,75 @@
     cell.textLabel.font = [UIFont systemFontOfSize:10];
     cell.textLabel.text = [contactList objectAtIndex:indexPath.row];
     
+    //Button call
+    UIButton *callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [callBtn setFrame:CGRectMake(10,10,20,20)];
+    callBtn.tag = indexPath.row;
+    [callBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //newBtn.backgroundColor = [UIColor greenColor];
+    
+    [callBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
+    [callBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
+    
+    [cell addSubview:callBtn];
+    //-------------
+    
+    
+    //Button weekly
+    UIButton *weeklyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [weeklyBtn setFrame:CGRectMake(190,10,20,20)];
+    weeklyBtn.tag = indexPath.row;
+    [weeklyBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    weeklyBtn.layer.cornerRadius = 5;
+    weeklyBtn.backgroundColor = [UIColor greenColor];
+    [weeklyBtn setTitle:@"W" forState:UIControlStateNormal];
+    [weeklyBtn setTitle:@"W" forState:UIControlStateHighlighted];
+    
+//    [weeklyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
+//    [weeklyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
+    
+    [cell addSubview:weeklyBtn];
+    //-------------
+    
+    
+    //Button monthly
+    UIButton *monthlyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [monthlyBtn setFrame:CGRectMake(220,10,20,20)];
+    monthlyBtn.tag = indexPath.row;
+    
+    [monthlyBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    monthlyBtn.layer.cornerRadius = 5;
+    monthlyBtn.backgroundColor = [UIColor blueColor];
+    [monthlyBtn setTitle:@"M" forState:UIControlStateNormal];
+    [monthlyBtn setTitle:@"M" forState:UIControlStateHighlighted];
+    
+//    [monthlyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
+//    [monthlyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
+    
+    [cell addSubview:monthlyBtn];
+    //-------------
+    
+    
+    
+    //Button yearly
+    UIButton *yearlyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [yearlyBtn setFrame:CGRectMake(250,10,20,20)];
+    yearlyBtn.tag = indexPath.row;
+    [yearlyBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    yearlyBtn.layer.cornerRadius = 5;
+    yearlyBtn.backgroundColor = [UIColor redColor];
+    [yearlyBtn setTitle:@"Y" forState:UIControlStateNormal];
+    [yearlyBtn setTitle:@"Y" forState:UIControlStateHighlighted];
+    
+//    [yearlyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
+//    [yearlyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
+    
+    [cell addSubview:yearlyBtn];
+    //-------------
     return cell;
 }
 
@@ -333,12 +382,6 @@
     });
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -357,6 +400,12 @@
         
         [self.navigationController pushViewController:yourViewController animated:YES];
     }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

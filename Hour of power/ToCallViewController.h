@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ToCallViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ToCallViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *addressTableView;
 
 @property (strong, nonatomic) NSMutableArray *contactList;
+
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
