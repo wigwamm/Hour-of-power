@@ -52,8 +52,35 @@
 {
     self.fullNameLabel.text = currentContact.fullName;
     self.phoneNumberLabel.text = currentContact.phoneNumber;
-    self.classificationLabel.text = [NSString stringWithFormat:@"%@", currentContact.classification];
-    self.unansweredLabel.text = [NSString stringWithFormat:@"%@", currentContact.unanswered];
+    
+    switch ([currentContact.classification intValue]) {
+        case 0:
+            self.classificationLabel.text = @"Daily";
+            break;
+            
+        case 1:
+            self.classificationLabel.text = @"Weekley";
+            break;
+            
+        case 2:
+            self.classificationLabel.text = @"Monthly";
+            break;
+            
+        case 3:
+            self.classificationLabel.text = @"Quarterly";
+            break;
+            
+        case 4:
+            self.classificationLabel.text = @"Yearly";
+            break;
+            
+        default:
+            self.classificationLabel.text = @"Not defined";
+            break;
+    }
+    
+    NSString *unanswered = [NSString stringWithFormat:@"%@", currentContact.unanswered];
+    
     self.lastCallLabel.text = [NSString stringWithFormat:@"%@", currentContact.lastCall];
     self.logLabel.text = [NSString stringWithFormat:@"%@", currentContact.log];
 }
