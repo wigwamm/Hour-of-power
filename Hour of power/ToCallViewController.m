@@ -41,8 +41,9 @@
     //FullName-Phone Contact selected
     NSString *fullName;
     NSString *phoneNumberSelected;
+    NSIndexPath *indexToSend;
     
-    //
+    //Contacts
     NSMutableArray *contacts;
     
     //StartStop Call
@@ -95,6 +96,8 @@
     [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
     refreshControl.tintColor = [UIColor blackColor];
     
+    contacts = [NSMutableArray array];
+    
     self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
                                                   ascending:YES
                                               withPredicate:nil
@@ -117,7 +120,6 @@
 	[self.pickerView reloadData];
     
     //AddressBook
-    
     [self getAddressBookAuthorization];
     
 //    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"addressBookSwitch"]) {
@@ -135,28 +137,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
-//        [self getAddressBookAuthorization];
-//    } else {
-//        NSLog(@"Address book sync disabled");
-//        [[self addressTableView] reloadData];
-//    }
-    
     //CountDown
     [self initCountDown];
     
     [self setEditing:NO animated:NO];
-    
-    [self fetchContacts];
-	// this UIViewController is about to re-appear, make sure we remove the current selection in our table view
-//	NSIndexPath *tableSelection = [self.addressTableView indexPathForSelectedRow];
-//	[self.addressTableView deselectRowAtIndexPath:tableSelection animated:NO];
-}
-
-- (void)fetchContacts
-{
-    // 3. Fetch entities with MagicalRecord
-    contacts = [[Contact findAllSortedBy:@"fullName" ascending:YES] mutableCopy];
 }
 
 - (void)getAddressBookAuthorization
@@ -224,10 +208,10 @@
                     fullContact = [NSString stringWithFormat:@"%@", firstName];
                 }
                 
-                
                 // Get the local context
                 NSManagedObjectContext *localContext = [NSManagedObjectContext contextForCurrentThread];
-                // Create a new contact in context
+                
+                // Create a new Photo in the current thread context
                 Contact *contact = [Contact createEntityInContext:localContext];
                 contact.fullName = fullContact;
                 contact.phoneNumber = phoneNumber;
@@ -236,25 +220,41 @@
                 NSDate *currDate = [NSDate date];
                 contact.lastCall = currDate;
                 contact.log = @"log";
-                // Save the modification in the local context
-                NSError *error = nil;
-                [localContext save:&error];
                 
+                // Save the modification in the local context
+                [localContext saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                    NSLog(@"Saved");
+                }];
             }
-            
         }
         
         // Set User Default to prevent another preload of data on startup.
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasPrefilledContacts"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
-    //[[self addressTableView] reloadData];
 }
 
 #pragma mark - TableView
 #pragma mark -
+#pragma mark UITableViewDelegate
 
+// the table's selection has changed, switch to that item's UIViewController
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.addressTableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexPath];
+
+    fullName = [NSString stringWithFormat:@"%@", currentContact.fullName];
+    phoneNumberSelected = [NSString stringWithFormat:@"%@", currentContact.phoneNumber];
+    indexToSend = indexPath;
+    
+    UIStoryboardSegue *segue = [[UIStoryboardSegue alloc] initWithIdentifier:@"detail" source:self destination:[[DetailToCallViewController alloc] init]];
+
+    [self prepareForSegue:segue sender:self];
+}
+
+#pragma mark -
 #pragma mark UITableViewDataSource
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -263,11 +263,12 @@
     {
         Contact *selectedContact = [fetchedResultsController objectAtIndexPath:indexPath];
         
-        // Remove the Contact
+        // Remove the photo
         [selectedContact deleteEntityInContext:[NSManagedObjectContext contextForCurrentThread]];
         
-        NSError *error = nil;
-        [[NSManagedObjectContext contextForCurrentThread] save:&error];
+        [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            NSLog(@"delated");
+        }];
     }
 }
 
@@ -276,7 +277,7 @@
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
     
-	return [sectionInfo numberOfObjects];
+    return [sectionInfo numberOfObjects];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -284,121 +285,81 @@
     Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", currentContact.fullName];
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", currentContact.phoneNumber];
-    
     cell.imageView.image = [UIImage imageNamed:@"call.png"];
 }
 
-- (void)btnCommentClick:(id)sender
-{
-    UIButton *senderButton = (UIButton *)sender;
-    NSIndexPath *path = [NSIndexPath indexPathForRow:senderButton.tag inSection:0];
-
-    Contact *currentContact = [fetchedResultsController objectAtIndexPath:path];
-    NSString *number = [NSString stringWithFormat:@"%@", currentContact.phoneNumber];
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",[number stringByReplacingOccurrencesOfString:@" " withString:@""]]]];
-}
-
+// tell our table what kind of cell to use and its title for the given row
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TableCell"];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TableCell"]; //UITableViewCellStyleSubtitle
-    }
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TableCell"];
+	if (cell == nil)
+	{
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"TableCell"];
+	}
     
     // Set up the cell...
     [self configureCell:cell atIndexPath:indexPath];
     
-//    cell.textLabel.font = [UIFont systemFontOfSize:10];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
     
-//    //Button call
+    //Button call
 //    UIButton *callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [callBtn setFrame:CGRectMake(10,10,20,20)];
 //    callBtn.tag = indexPath.row;
 //    [callBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-//    
+//
 //    //newBtn.backgroundColor = [UIColor greenColor];
-//    
+//
 //    [callBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
 //    [callBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
-//    
+//
 //    [cell addSubview:callBtn];
-//    //-------------
-//    
-    
-//    //Button weekly
+    //-------------
+
+    //Button weekly
 //    UIButton *weeklyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [weeklyBtn setFrame:CGRectMake(190,10,20,20)];
 //    weeklyBtn.tag = indexPath.row;
 //    [weeklyBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-//    
+//
 //    weeklyBtn.layer.cornerRadius = 5;
 //    weeklyBtn.backgroundColor = [UIColor greenColor];
 //    [weeklyBtn setTitle:@"W" forState:UIControlStateNormal];
 //    [weeklyBtn setTitle:@"W" forState:UIControlStateHighlighted];
-//    
+//
 ////    [weeklyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
 ////    [weeklyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
 //    
 //    [cell addSubview:weeklyBtn];
-//    //-------------
-//    
-//    
-//    //Button monthly
-//    UIButton *monthlyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [monthlyBtn setFrame:CGRectMake(220,10,20,20)];
-//    monthlyBtn.tag = indexPath.row;
-//    
-//    [monthlyBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    monthlyBtn.layer.cornerRadius = 5;
-//    monthlyBtn.backgroundColor = [UIColor blueColor];
-//    [monthlyBtn setTitle:@"M" forState:UIControlStateNormal];
-//    [monthlyBtn setTitle:@"M" forState:UIControlStateHighlighted];
-//    
-////    [monthlyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
-////    [monthlyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
-//    
-//    [cell addSubview:monthlyBtn];
-//    //-------------
-//    
-//    
-//    
-//    //Button yearly
-//    UIButton *yearlyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [yearlyBtn setFrame:CGRectMake(250,10,20,20)];
-//    yearlyBtn.tag = indexPath.row;
-//    [yearlyBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    yearlyBtn.layer.cornerRadius = 5;
-//    yearlyBtn.backgroundColor = [UIColor redColor];
-//    [yearlyBtn setTitle:@"Y" forState:UIControlStateNormal];
-//    [yearlyBtn setTitle:@"Y" forState:UIControlStateHighlighted];
-//    
-////    [yearlyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
-////    [yearlyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
-//    
-//    [cell addSubview:yearlyBtn];
-//    //-------------
+    //-------------
     
-    return cell;
+	return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexPath];
+//- (void)btnCommentClick:(id)sender
+//{
+//    UIButton *senderButton = (UIButton *)sender;
+//    NSIndexPath *path = [NSIndexPath indexPathForRow:senderButton.tag inSection:0];
+//
+//    Contact *currentContact = [fetchedResultsController objectAtIndexPath:path];
+//    NSString *number = [NSString stringWithFormat:@"%@", currentContact.phoneNumber];
+//
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",[number stringByReplacingOccurrencesOfString:@" " withString:@""]]]];
+//}
 
-    fullName = [NSString stringWithFormat:@"%@", currentContact.fullName];
-    phoneNumberSelected = [NSString stringWithFormat:@"%@", currentContact.phoneNumber];
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    UIStoryboardSegue *segue = [[UIStoryboardSegue alloc] initWithIdentifier:@"segue" source:self destination:[[DetailToCallViewController alloc] init]];
+    if(section == 0) {
+        return @"Today";
+    }
     
-    [self prepareForSegue:segue sender:self];
+    return @"Never";
 }
 
 #pragma mark - NSFetchedResultsController Delegate Methods
@@ -465,7 +426,6 @@
     [_counterLabel setStartValue:600000*6];
     
     _counterLabel.countdownDelegate = self;
-    
     
     [_counterLabel setBoldFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:30]];
     [_counterLabel setRegularFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:30]];
@@ -678,12 +638,18 @@
 
 - (NSString *)pickerView:(AKPickerView *)pickerView titleForItem:(NSInteger)item
 {
-	return self.titles[item];
+    return self.titles[item];
 }
 
 - (void)pickerView:(AKPickerView *)pickerView didSelectItem:(NSInteger)item
 {
 	NSLog(@"%@", self.titles[item]);
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:item inSection:0];
+    
+    [self.addressTableView scrollToRowAtIndexPath:indexPath
+                                 atScrollPosition:UITableViewScrollPositionTop
+                                         animated:YES];
 }
 
 #pragma mark - Navigation
@@ -693,13 +659,12 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([[segue identifier] isEqualToString:@"segue"])
+    if ([[segue identifier] isEqualToString:@"detail"])
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
         DetailToCallViewController *yourViewController = (DetailToCallViewController *)[storyboard instantiateViewControllerWithIdentifier:@"DetailToCallViewController"];
         
-        yourViewController.fullName = fullName;
-        yourViewController.phoneNumber = [NSString stringWithFormat:@"%@", phoneNumberSelected];
+        yourViewController.index = indexToSend;
         
         [self.navigationController pushViewController:yourViewController animated:YES];
     }
