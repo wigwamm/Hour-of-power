@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GameKit/GameKit.h>
 
-@interface LeaderBoardViewController : UIViewController
+@interface LeaderBoardViewController : UIViewController <GKGameCenterControllerDelegate>
+
+@property (strong, nonatomic) IBOutlet UITextField *pointsTextField;
 
 @end
