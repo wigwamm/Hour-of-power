@@ -8,11 +8,18 @@
 
 #import "DetailToCallViewController.h"
 
+#import "Contact.h"
+
 @interface DetailToCallViewController ()
 
 @end
 
 @implementation DetailToCallViewController
+{
+    Contact *currentContact;
+}
+
+@synthesize fetchedResultsController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,15 +35,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.fullNameLabel.text = self.fullName;
-    self.phoneNumberLabel.text = self.phoneNumber;
+    self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
+                                                    ascending:YES
+                                                withPredicate:nil
+                                                      groupBy:nil
+                                                     delegate:self
+                                                    inContext:[NSManagedObjectContext contextForCurrentThread]];
+    
+    currentContact = [fetchedResultsController objectAtIndexPath:self.index];
+    
+    [self fillScreen];
+
+}
+
+- (void)fillScreen
+{
+    self.fullNameLabel.text = currentContact.fullName;
+    self.phoneNumberLabel.text = currentContact.phoneNumber;
+    self.classificationLabel.text = [NSString stringWithFormat:@"%@", currentContact.classification];
+    self.unansweredLabel.text = [NSString stringWithFormat:@"%@", currentContact.unanswered];
+    self.lastCallLabel.text = [NSString stringWithFormat:@"%@", currentContact.lastCall];
+    self.logLabel.text = [NSString stringWithFormat:@"%@", currentContact.log];
 }
 
 - (IBAction)callNumber:(id)sender
 {
     //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:444"]];
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",[self.phoneNumber
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",[currentContact.phoneNumber
                                                                                                                 stringByReplacingOccurrencesOfString:@" "
                                                                                                                 withString:@""]]]];
 }

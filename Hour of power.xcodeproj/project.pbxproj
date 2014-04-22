@@ -10,8 +10,10 @@
 		75D65F5BDC9240C0AC87AABE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B42A1D6FFC44B9BF113406 /* libPods.a */; };
 		FC2030F718F70D540003EFF6 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2030F618F70D540003EFF6 /* HelpViewController.m */; };
 		FC2030FE18F71CBE0003EFF6 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2030FD18F71CBE0003EFF6 /* AddressBook.framework */; };
+		FC671C6218FEAE1D008AFD9F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC671C6118FEAE1D008AFD9F /* GameKit.framework */; };
 		FCA35AAF18F8558500F449B6 /* LeaderBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA35AAE18F8558500F449B6 /* LeaderBoardViewController.m */; };
 		FCA35AB418F8582D00F449B6 /* TTCounterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA35AB318F8582D00F449B6 /* TTCounterLabel.m */; };
+		FCB83B8D19005C6200B972C2 /* AKPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB83B8C19005C6200B972C2 /* AKPickerView.m */; };
 		FCC5F95818F6A515007F5A62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F95718F6A515007F5A62 /* Foundation.framework */; };
 		FCC5F95A18F6A515007F5A62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F95918F6A515007F5A62 /* CoreGraphics.framework */; };
 		FCC5F95C18F6A515007F5A62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC5F95B18F6A515007F5A62 /* UIKit.framework */; };
@@ -76,10 +78,13 @@
 		FC2030F518F70D540003EFF6 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		FC2030F618F70D540003EFF6 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		FC2030FD18F71CBE0003EFF6 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FC671C6118FEAE1D008AFD9F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		FCA35AAD18F8558500F449B6 /* LeaderBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderBoardViewController.h; sourceTree = "<group>"; };
 		FCA35AAE18F8558500F449B6 /* LeaderBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderBoardViewController.m; sourceTree = "<group>"; };
 		FCA35AB218F8582D00F449B6 /* TTCounterLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCounterLabel.h; sourceTree = "<group>"; };
 		FCA35AB318F8582D00F449B6 /* TTCounterLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTCounterLabel.m; sourceTree = "<group>"; };
+		FCB83B8B19005C6200B972C2 /* AKPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKPickerView.h; sourceTree = "<group>"; };
+		FCB83B8C19005C6200B972C2 /* AKPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKPickerView.m; sourceTree = "<group>"; };
 		FCC5F95418F6A515007F5A62 /* Hour of power.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hour of power.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC5F95718F6A515007F5A62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FCC5F95918F6A515007F5A62 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -172,6 +177,7 @@
 			files = (
 				FCFF082118FC47A00022B444 /* CoreData.framework in Frameworks */,
 				FC2030FE18F71CBE0003EFF6 /* AddressBook.framework in Frameworks */,
+				FC671C6218FEAE1D008AFD9F /* GameKit.framework in Frameworks */,
 				FCC5F95A18F6A515007F5A62 /* CoreGraphics.framework in Frameworks */,
 				FCC5F95C18F6A515007F5A62 /* UIKit.framework in Frameworks */,
 				FCC5F95818F6A515007F5A62 /* Foundation.framework in Frameworks */,
@@ -216,7 +222,18 @@
 				FCA35AB218F8582D00F449B6 /* TTCounterLabel.h */,
 				FCA35AB318F8582D00F449B6 /* TTCounterLabel.m */,
 			);
-			path = TTCounterLabel;
+			name = TTCounterLabel;
+			path = "Hour of power/TTCounterLabel";
+			sourceTree = "<group>";
+		};
+		FCB83B8A19005C6200B972C2 /* AKPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				FCB83B8B19005C6200B972C2 /* AKPickerView.h */,
+				FCB83B8C19005C6200B972C2 /* AKPickerView.m */,
+			);
+			name = AKPickerView;
+			path = "Hour of power/AKPickerView";
 			sourceTree = "<group>";
 		};
 		FCC5F94B18F6A515007F5A62 = {
@@ -242,6 +259,10 @@
 		FCC5F95618F6A515007F5A62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCFF07C818FC46880022B444 /* MagicalRecord */,
+				FCA35AB118F8582D00F449B6 /* TTCounterLabel */,
+				FCB83B8A19005C6200B972C2 /* AKPickerView */,
+				FC671C6118FEAE1D008AFD9F /* GameKit.framework */,
 				FCFF082018FC47A00022B444 /* CoreData.framework */,
 				FC2030FD18F71CBE0003EFF6 /* AddressBook.framework */,
 				FCC5F95718F6A515007F5A62 /* Foundation.framework */,
@@ -256,11 +277,7 @@
 		FCC5F95D18F6A515007F5A62 /* Hour of power */ = {
 			isa = PBXGroup;
 			children = (
-				FCFF082518FC48150022B444 /* Model.xcdatamodeld */,
-				FCFF082818FC4C070022B444 /* Contact.h */,
-				FCFF082918FC4C070022B444 /* Contact.m */,
-				FCFF07C818FC46880022B444 /* MagicalRecord */,
-				FCA35AB118F8582D00F449B6 /* TTCounterLabel */,
+				FCCC8CC21906669200B9FD4F /* Model */,
 				FCC5F96618F6A515007F5A62 /* AppDelegate.h */,
 				FCC5F96718F6A515007F5A62 /* AppDelegate.m */,
 				FCC5F96918F6A515007F5A62 /* Main_iPhone.storyboard */,
@@ -314,6 +331,16 @@
 			name = ToCall;
 			sourceTree = "<group>";
 		};
+		FCCC8CC21906669200B9FD4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FCFF082518FC48150022B444 /* Model.xcdatamodeld */,
+				FCFF082818FC4C070022B444 /* Contact.h */,
+				FCFF082918FC4C070022B444 /* Contact.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		FCE52F4118F8947700E1AADF /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,7 +357,8 @@
 				FCFF07F318FC46890022B444 /* Core */,
 				FCFF080518FC46890022B444 /* CoreData+MagicalRecord.h */,
 			);
-			path = MagicalRecord;
+			name = MagicalRecord;
+			path = "Hour of power/MagicalRecord";
 			sourceTree = "<group>";
 		};
 		FCFF07C918FC46880022B444 /* Categories */ = {
@@ -475,6 +503,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = wigwamm;
 				TargetAttributes = {
+					FCC5F95318F6A515007F5A62 = {
+						DevelopmentTeam = 5FFZ3P2MFN;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
+					};
 					FCC5F97A18F6A515007F5A62 = {
 						TestTargetID = FCC5F95318F6A515007F5A62;
 					};
@@ -594,6 +630,7 @@
 				FCFF081618FC46890022B444 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				FCFF082A18FC4C070022B444 /* Contact.m in Sources */,
 				FCFF080918FC46890022B444 /* NSNumber+MagicalDataImport.m in Sources */,
+				FCB83B8D19005C6200B972C2 /* AKPickerView.m in Sources */,
 				FCFF080F18FC46890022B444 /* NSManagedObject+MagicalFinders.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -730,11 +767,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hour of power/Hour of power-Prefix.pch";
 				INFOPLIST_FILE = "Hour of power/Hour of power-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -745,11 +785,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hour of power/Hour of power-Prefix.pch";
 				INFOPLIST_FILE = "Hour of power/Hour of power-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
