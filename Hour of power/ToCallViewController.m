@@ -143,6 +143,8 @@
     [self setEditing:NO animated:NO];
 }
 
+
+#pragma mark - AddressBook Sync
 - (void)getAddressBookAuthorization
 {
     // Request authorization to Address Book
@@ -223,7 +225,7 @@
                 
                 // Save the modification in the local context
                 [localContext saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                    NSLog(@"Saved");
+                    NSLog(@"Imported contact");
                 }];
             }
         }
@@ -234,7 +236,7 @@
     }
 }
 
-#pragma mark - TableView
+#pragma mark - - TableView
 #pragma mark -
 #pragma mark UITableViewDelegate
 
@@ -270,6 +272,20 @@
             NSLog(@"delated");
         }];
     }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if(section == 0) {
+        return @"Today";
+    }
+    
+    return @"Never";
 }
 
 // tell our table how many rows it will have, in our case the size of our menuList
@@ -346,21 +362,6 @@
 //
 //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",[number stringByReplacingOccurrencesOfString:@" " withString:@""]]]];
 //}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-    if(section == 0) {
-        return @"Today";
-    }
-    
-    return @"Never";
-}
 
 #pragma mark - NSFetchedResultsController Delegate Methods
 
@@ -461,7 +462,7 @@
     });
 }
 
-#pragma mark - PopUp
+#pragma mark - - PopUp
 #pragma mark -
 - (void)customizePopUp
 {
@@ -503,74 +504,163 @@
 - (IBAction)busyButton:(id)sender
 {
     self.callResultView.hidden = YES;
+    self.nextCallView.hidden = YES;
+    self.contactNewView.hidden = YES;
+    self.callNoteView.hidden = YES;
+    
+    [self updateAnsweredWithAnswer:@YES];
 }
 
 - (IBAction)notAnsweredButton:(id)sender
 {
     self.callResultView.hidden = YES;
+    self.nextCallView.hidden = YES;
+    self.contactNewView.hidden = YES;
+    self.callNoteView.hidden = YES;
+    
+    [self updateAnsweredWithAnswer:@YES];
 }
 
 - (IBAction)answeredButton:(id)sender
 {
     self.callResultView.hidden = YES;
+    
+    [self updateAnsweredWithAnswer:@NO];
+}
+
+- (void)updateAnsweredWithAnswer:(NSNumber *)answer
+{
+    // Create a new Contact in the current thread context
+    Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexToSend];
+    currentContact.unanswered = answer;
+    
+    NSDate *currDate = [NSDate date];
+    currentContact.lastCall = currDate;
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated answer");
+    }];
 }
 
 #pragma mark NextCall
 - (IBAction)dailyButton:(id)sender
 {
     self.nextCallView.hidden = YES;
+    
+    [self updateContactWithClassification:@0];
 }
 
 - (IBAction)weeklyButton:(id)sender
 {
     self.nextCallView.hidden = YES;
+    
+    [self updateContactWithClassification:@1];
 }
 
 - (IBAction)monthlyButton:(id)sender
 {
     self.nextCallView.hidden = YES;
+    
+    [self updateContactWithClassification:@2];
 }
 
 - (IBAction)quarterlyButton:(id)sender
 {
     self.nextCallView.hidden = YES;
+    
+    [self updateContactWithClassification:@3];
 }
 
 - (IBAction)yearlyButton:(id)sender
 {
     self.nextCallView.hidden = YES;
+    
+    [self updateContactWithClassification:@4];
+}
+
+- (void)updateContactWithClassification:(NSNumber *)classification
+{
+    // Create a new Contact in the current thread context
+    Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexToSend];
+    currentContact.classification = classification;
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated classification");
+    }];
 }
 
 #pragma mark NewContact
 - (IBAction)contactNewDailyButton:(id)sender
 {
     self.contactNewView.hidden = YES;
+    
+    [self createNewContactWithClassification:@0];
 }
 
 - (IBAction)contactNewWeeklyButton:(id)sender
 {
     self.contactNewView.hidden = YES;
+    
+    [self createNewContactWithClassification:@1];
 }
 
 - (IBAction)contactNewMonthlyButton:(id)sender
 {
     self.contactNewView.hidden = YES;
+    
+    [self createNewContactWithClassification:@2];
 }
 
 - (IBAction)contactNewQuarterlyButton:(id)sender
 {
     self.contactNewView.hidden = YES;
+    
+    [self createNewContactWithClassification:@3];
 }
 
 - (IBAction)contactNewYearlyButton:(id)sender
 {
     self.contactNewView.hidden = YES;
+    
+    [self createNewContactWithClassification:@4];
+}
+
+- (void)createNewContactWithClassification:(NSNumber *)classification
+{
+    // Create a new Photo in the current thread context
+    Contact *contact = [Contact createEntityInContext:[NSManagedObjectContext contextForCurrentThread]];
+    
+    contact.fullName = self.fullNameTextField.text;
+    contact.phoneNumber = self.phoneNumberTextField.text;
+    contact.classification = classification;
+    contact.unanswered = @YES;
+    
+    NSDate *currDate = [NSDate date];
+    contact.lastCall = currDate;
+    
+    contact.log = @"Description";
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Created new contact");
+    }];
 }
 
 #pragma mark CallNote
 - (IBAction)callNoteSaveButton:(id)sender
 {
     self.callNoteView.hidden = YES;
+    
+    // Create a new Contact in the current thread context
+    Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexToSend];
+    currentContact.log = self.callNoteTextView.text;
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated call desctiption");
+    }];
 }
 
 #pragma mark - TextFields
@@ -630,7 +720,7 @@
     }
 }
 
-//PickerView
+#pragma mark - PickerView
 - (NSUInteger)numberOfItemsInPickerView:(AKPickerView *)pickerView
 {
 	return [self.titles count];
