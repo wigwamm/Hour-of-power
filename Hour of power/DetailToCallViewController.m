@@ -162,11 +162,6 @@
     [UIView animateWithDuration:0.5 animations:^{self.containerScrollView.contentOffset = CGPointMake(0, 0);}];
 }
 
-- (IBAction)testAction:(id)sende
-{
-    [self showPopup];
-}
-
 #pragma mark - PointStuff
 - (void)foreground
 {
@@ -223,7 +218,7 @@
     //    formSheet.transitionStyle = MZFormSheetTransitionStyleSlideFromTop;
     formSheet.shadowRadius = 2.0;
     formSheet.shadowOpacity = 0.3;
-    formSheet.shouldDismissOnBackgroundViewTap = YES;
+    formSheet.shouldDismissOnBackgroundViewTap = NO;
     formSheet.shouldCenterVertically = YES;
     formSheet.movementWhenKeyboardAppears = MZFormSheetWhenKeyboardAppearsCenterVertically;
     //    formSheet.landscapeTopInset = 50;

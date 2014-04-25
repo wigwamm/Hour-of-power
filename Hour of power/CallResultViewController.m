@@ -10,6 +10,9 @@
 
 #import "Contact.h"
 
+#import "MZFormSheetController.h"
+#import "MZFormSheetSegue.h"
+
 @interface CallResultViewController () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -37,17 +40,26 @@
 #pragma mark CallResult
 - (IBAction)answeredButton:(id)sender
 {
-    [self updateAnsweredWithAnswer:@YES];
+    //[self updateAnsweredWithAnswer:@YES];
+    NSLog(@"Answered");
 }
 
-- (IBAction)notAnsweredButton:(id)sender
+- (IBAction)unansweredButton:(id)sender
 {
-    [self updateAnsweredWithAnswer:@NO];
+    //[self updateAnsweredWithAnswer:@NO];
+    
+    [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formSheetController) {
+        // do sth
+    }];
 }
 
 - (IBAction)busyButton:(id)sender
 {
-    [self updateAnsweredWithAnswer:@NO];
+    //[self updateAnsweredWithAnswer:@NO];
+    
+    [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formSheetController) {
+        // do sth
+    }];
 }
 
 - (void)updateAnsweredWithAnswer:(NSNumber *)answer

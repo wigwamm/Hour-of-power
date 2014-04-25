@@ -360,6 +360,9 @@
 		FCC5F95E18F6A515007F5A62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FCFF546F19094D4F00081E74 /* call_Orange.png */,
+				FCFF07C618FC2D950022B444 /* call.png */,
+				FC431E2A190A71E900413DD5 /* edit_user.png */,
 				FCC5F95F18F6A515007F5A62 /* Hour of power-Info.plist */,
 				FCC5F96018F6A515007F5A62 /* InfoPlist.strings */,
 				FCC5F96318F6A515007F5A62 /* main.m */,
@@ -391,8 +394,6 @@
 			children = (
 				FCC5F99E18F6FB65007F5A62 /* ToCallViewController.h */,
 				FCC5F99F18F6FB65007F5A62 /* ToCallViewController.m */,
-				FCFF546F19094D4F00081E74 /* call_Orange.png */,
-				FCFF07C618FC2D950022B444 /* call.png */,
 				FCE52F4118F8947700E1AADF /* Detail */,
 			);
 			name = ToCall;
@@ -415,7 +416,6 @@
 			children = (
 				FCE52F3E18F8947300E1AADF /* DetailToCallViewController.h */,
 				FCE52F3F18F8947300E1AADF /* DetailToCallViewController.m */,
-				FC431E2A190A71E900413DD5 /* edit_user.png */,
 				FC5D0039190AAC2300928DE0 /* PopUp */,
 			);
 			name = Detail;
