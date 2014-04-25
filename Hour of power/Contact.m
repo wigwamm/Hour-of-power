@@ -2,7 +2,7 @@
 //  Contact.m
 //  Hour of power
 //
-//  Created by Simone Ferrini on 14/04/14.
+//  Created by Simone Ferrini on 23/04/14.
 //  Copyright (c) 2014 wigwamm. All rights reserved.
 //
 
@@ -11,11 +11,12 @@
 
 @implementation Contact
 
-@dynamic fullName;
-@dynamic phoneNumber;
 @dynamic classification;
-@dynamic unanswered;
+@dynamic fullName;
 @dynamic lastCall;
 @dynamic log;
+@dynamic phoneNumber;
+@dynamic answered;
+@dynamic callDate;
 
 @end

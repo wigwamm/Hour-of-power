@@ -15,6 +15,21 @@
 {
     // Override point for customization after application launch.
     
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont fontWithName:@"Futura" size:18],
+								  NSForegroundColorAttributeName: [UIColor whiteColor] };
+    [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.510 green:0.874 blue:1.000 alpha:1.000]];
+    
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:0.510 green:0.874 blue:1.000 alpha:1.000]];
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
+//    [[UITabBar appearance] setItemSpacing:20];
+    
+    
     // Set icon badge number to zero
     application.applicationIconBadgeNumber = 0;
     

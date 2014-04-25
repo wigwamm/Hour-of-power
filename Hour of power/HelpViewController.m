@@ -28,17 +28,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationItem.title = @"Help and settings";
+    
     [self setStatus];
 }
 
 - (void)setStatus
 {
+    [self setSwitchStatusWithSwitch:self.addressBookSwitch withStatus:YES];
+    
     //AddressBook
-    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
-        [self setSwitchStatusWithSwitch:self.addressBookSwitch withStatus:YES];
-    } else {
-        [self setSwitchStatusWithSwitch:self.addressBookSwitch withStatus:NO];
-    }
+//    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+//        [self setSwitchStatusWithSwitch:self.addressBookSwitch withStatus:YES];
+//    } else {
+//        [self setSwitchStatusWithSwitch:self.addressBookSwitch withStatus:NO];
+//    }
 }
 
 - (void)setSwitchStatusWithSwitch:(UISwitch *)theSwitch withStatus:(BOOL)status

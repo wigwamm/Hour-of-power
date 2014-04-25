@@ -35,6 +35,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.noteNewTextView.layer.borderWidth = 1.0f;
+    self.noteNewTextView.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    self.noteNewTextView.delegate = self;
+    
     self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
                                                     ascending:YES
                                                 withPredicate:nil
@@ -45,44 +50,40 @@
     currentContact = [fetchedResultsController objectAtIndexPath:self.index];
     
     [self fillScreen];
-
 }
 
 - (void)fillScreen
 {
-    self.fullNameLabel.text = currentContact.fullName;
-    self.phoneNumberLabel.text = currentContact.phoneNumber;
+    self.navigationItem.title = currentContact.fullName;
+    self.phoneNumberLabel.text = [NSString stringWithFormat:@"Phone n°: %@", currentContact.phoneNumber];
+    self.lastCallLabel.text = [NSString stringWithFormat:@"Last call: %@", currentContact.lastCall];
+    self.logLabel.text = [NSString stringWithFormat:@"Note: %@", currentContact.log];
     
     switch ([currentContact.classification intValue]) {
         case 0:
-            self.classificationLabel.text = @"Daily";
+            self.classificationSegmentedControl.selectedSegmentIndex = 0;
             break;
             
         case 1:
-            self.classificationLabel.text = @"Weekley";
+            self.classificationSegmentedControl.selectedSegmentIndex = 1;
             break;
             
         case 2:
-            self.classificationLabel.text = @"Monthly";
+            self.classificationSegmentedControl.selectedSegmentIndex = 2;
             break;
             
         case 3:
-            self.classificationLabel.text = @"Quarterly";
+            self.classificationSegmentedControl.selectedSegmentIndex = 3;
             break;
             
         case 4:
-            self.classificationLabel.text = @"Yearly";
+            self.classificationSegmentedControl.selectedSegmentIndex = 4;
             break;
             
         default:
-            self.classificationLabel.text = @"Not defined";
+            self.classificationSegmentedControl.selectedSegmentIndex = 0;
             break;
     }
-    
-    NSString *unanswered = [NSString stringWithFormat:@"%@", currentContact.unanswered];
-    
-    self.lastCallLabel.text = [NSString stringWithFormat:@"%@", currentContact.lastCall];
-    self.logLabel.text = [NSString stringWithFormat:@"%@", currentContact.log];
 }
 
 - (IBAction)callNumber:(id)sender
@@ -94,10 +95,40 @@
                                                                                                                 withString:@""]]]];
 }
 
+- (IBAction)classificationSegmentedAction:(id)sender
+{
+    NSInteger selectedSegmentIndex = [self.classificationSegmentedControl selectedSegmentIndex];
+    NSString *selectedSegmentTitle = [self.classificationSegmentedControl titleForSegmentAtIndex: selectedSegmentIndex];
+    
+    NSLog(@"%li %@", (long)selectedSegmentIndex, selectedSegmentTitle);
+    
+    currentContact.classification = [NSNumber numberWithLong:selectedSegmentIndex];
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated classification");
+    }];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.noteNewTextView resignFirstResponder];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [UIView animateWithDuration:0.5 animations:^{self.containerScrollView.contentOffset = CGPointMake(0, 80);}];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [UIView animateWithDuration:0.5 animations:^{self.containerScrollView.contentOffset = CGPointMake(0, 0);}];
 }
 
 /*

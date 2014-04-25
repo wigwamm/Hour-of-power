@@ -8,16 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailToCallViewController : UIViewController <NSFetchedResultsControllerDelegate>
+@interface DetailToCallViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) NSIndexPath *index;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
-@property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *phoneNumberLabel;
-@property (strong, nonatomic) IBOutlet UILabel *classificationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *lastCallLabel;
 @property (strong, nonatomic) IBOutlet UILabel *logLabel;
+
+@property (strong, nonatomic) IBOutlet UISegmentedControl *classificationSegmentedControl;
+
+@property (strong, nonatomic) IBOutlet UIScrollView *containerScrollView;
+
+@property (strong, nonatomic) IBOutlet UITextView *noteNewTextView;
 
 @end

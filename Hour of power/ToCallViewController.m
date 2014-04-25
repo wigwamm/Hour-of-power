@@ -1,4 +1,4 @@
-//
+   //
 //  ToCallViewController.m
 //  Hour of power
 //
@@ -18,8 +18,11 @@
 #import "ODRefreshControl.h"
 
 #import "Contact.h"
+#import "CallDate.h"
 
 #import "AKPickerView.h"
+
+#define N_CLASSIFICATIONS 5
 
 @interface ToCallViewController () <TTCounterLabelDelegate, AKPickerViewDelegate>
 {
@@ -67,6 +70,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationItem.title = @"Hour Of Power";
+    
+    //BlurView
+    [self.blurView setBlurAlpha:0.01];
+    
     //NotificationFromAppDelegate
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(foreground)
@@ -105,17 +113,20 @@
                                                    delegate:self
                                                   inContext:[NSManagedObjectContext contextForCurrentThread]];
     
+    [self rankingUsers];
+    
     //PickerView
     //self.pickerView = [[AKPickerView alloc] initWithFrame:self.view.bounds];
-    self.pickerView = [[AKPickerView alloc] initWithFrame:CGRectMake(0, 470, self.view.frame.size.width, 40)];
+    //self.pickerView = [[AKPickerView alloc] initWithFrame:CGRectMake(0, 470, self.view.frame.size.width, 40)];
+    self.pickerView = [[AKPickerView alloc] initWithFrame:CGRectMake(0, 480, self.view.frame.size.width, 40)];
 	self.pickerView.delegate = self;
 	[self.view addSubview:self.pickerView];
     
-	self.titles = @[@"Daily",
-					@"Weekly",
-					@"Monthly",
-					@"Quarterly",
-					@"Yearly"];
+	self.titles = @[@"Today",
+					@"Tomorrow",
+					@"Next week",
+					@"Next month",
+					@"Next year"];
     
 	[self.pickerView reloadData];
     
@@ -133,6 +144,77 @@
 //            NSLog(@"Address book sync disabled");
 //        }
 //    }
+}
+
+- (void)rankingUsers
+{
+    NSArray *datess = [CallDate findAll];
+    NSDate *newDate;
+    
+    for (int s = 100; s < datess.count; s ++) {
+        
+        CallDate *ggggg = datess[s];
+        
+        NSDate *now = [NSDate date];
+        
+        NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+        dayComponent.day = 1;
+        
+        NSCalendar *theCalendar = [NSCalendar currentCalendar];
+        newDate = [theCalendar dateByAddingComponents:dayComponent toDate:now options:0];
+        
+        ggggg.nextCall = newDate;
+        
+        // Save the modification in the local context
+        [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            NSLog(@"Updated answer");
+        }];
+    }
+    
+    NSDate *dateNormalized = [self normalizedDateWithDate:newDate];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(nextCall >= %@) AND (nextCall <= %@)", dateNormalized, newDate];
+    
+    NSArray * callDateFiltred = [CallDate findAllSortedBy:@"nextCall"
+                                              ascending:YES
+                                          withPredicate:predicate];
+    NSLog(@"CallDateFiltred: %@", callDateFiltred);
+    
+    
+    for (int classification = 0; classification < N_CLASSIFICATIONS; classification ++) {
+        
+//        NSArray * people = [Contact findAllSortedBy:@"fullName"
+//                                          ascending:YES
+//                                      withPredicate:[NSPredicate predicateWithFormat:@"classification = %i", classification]];
+        
+        
+        NSArray * people = [Contact findAllSortedBy:@"fullName"
+                                          ascending:YES
+                                      withPredicate:[NSPredicate predicateWithFormat:@"classification = %i", classification]];
+        
+
+        NSArray * dates = [CallDate findAll];
+        CallDate *ddddd = dates[2];
+        
+        NSString *nsx = ddddd.nextCall;
+        
+//        if (people.count > 0) {
+//            
+//            for (int i = 0; i < people.count; i++) {
+//                Contact *myUser = people[i];
+//                NSString *na = myUser.fullName;
+//                
+//                NSLog(@"%@ classification: %i", na, classification);
+//                
+//            }
+//        }
+    }
+}
+
+-(NSDate*)normalizedDateWithDate:(NSDate*)date
+{
+    NSDateComponents* components = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate: date];
+    return [[NSCalendar currentCalendar] dateFromComponents:components];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -171,7 +253,6 @@
 
 - (void)getContact
 {
-    
     // Setup App with prefilled contact.
     //if (![[NSUserDefaults standardUserDefaults] objectForKey:@"HasPrefilledContacts"]) {
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"HasPrefilledContacts"]) {
@@ -218,10 +299,15 @@
                 contact.fullName = fullContact;
                 contact.phoneNumber = phoneNumber;
                 contact.classification = @1;
-                contact.unanswered = @NO;
+                contact.answered = @NO;
+                
                 NSDate *currDate = [NSDate date];
                 contact.lastCall = currDate;
                 contact.log = @"log";
+                
+                CallDate *callDate = [CallDate createEntityInContext:localContext];
+                callDate.contact = [NSSet setWithObject:contact];
+                callDate.nextCall = currDate;
                 
                 // Save the modification in the local context
                 [localContext saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
@@ -288,6 +374,31 @@
     return @"Never";
 }
 
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 20)];
+    [headerView setBackgroundColor:[UIColor colorWithRed:0.510 green:0.874 blue:1.000 alpha:1.000]];
+    
+    
+    NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
+    if (sectionTitle == nil) {
+        return nil;
+    }
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(0, 0, headerView.bounds.size.width, headerView.bounds.size.height);
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont fontWithName:@"Futura" size:18];
+    label.text = [NSString stringWithFormat:@" %@", sectionTitle];
+//    label.textAlignment = UITextAlignmentCenter;
+    
+    [headerView addSubview:label];
+    
+    return headerView;
+
+}
+
 // tell our table how many rows it will have, in our case the size of our menuList
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -301,7 +412,7 @@
     Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", currentContact.fullName];
-    cell.imageView.image = [UIImage imageNamed:@"call.png"];
+    cell.imageView.image = [UIImage imageNamed:@"call_Orange.png"];
 }
 
 // tell our table what kind of cell to use and its title for the given row
@@ -428,9 +539,9 @@
     
     _counterLabel.countdownDelegate = self;
     
-    [_counterLabel setBoldFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:30]];
-    [_counterLabel setRegularFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:30]];
-    [_counterLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20]];
+    [_counterLabel setBoldFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:10]];
+    [_counterLabel setRegularFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:10]];
+    [_counterLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:6]];
     
 //    _counterLabel.textColor = [UIColor darkGrayColor];
     
@@ -532,7 +643,7 @@
 {
     // Create a new Contact in the current thread context
     Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexToSend];
-    currentContact.unanswered = answer;
+    currentContact.answered = answer;
     
     NSDate *currDate = [NSDate date];
     currentContact.lastCall = currDate;
@@ -581,7 +692,6 @@
 
 - (void)updateContactWithClassification:(NSNumber *)classification
 {
-    // Create a new Contact in the current thread context
     Contact *currentContact = [fetchedResultsController objectAtIndexPath:indexToSend];
     currentContact.classification = classification;
     
@@ -635,7 +745,7 @@
     contact.fullName = self.fullNameTextField.text;
     contact.phoneNumber = self.phoneNumberTextField.text;
     contact.classification = classification;
-    contact.unanswered = @YES;
+    contact.answered = @YES;
     
     NSDate *currDate = [NSDate date];
     contact.lastCall = currDate;
@@ -733,7 +843,7 @@
 
 - (void)pickerView:(AKPickerView *)pickerView didSelectItem:(NSInteger)item
 {
-	NSLog(@"%@", self.titles[item]);
+	NSLog(@"PikerSelected: %@", self.titles[item]);
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:item inSection:0];
     
