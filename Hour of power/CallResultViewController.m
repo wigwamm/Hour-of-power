@@ -8,7 +8,11 @@
 
 #import "CallResultViewController.h"
 
-@interface CallResultViewController ()
+#import "Contact.h"
+
+@interface CallResultViewController () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -28,6 +32,37 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Call Result";
+}
+
+#pragma mark CallResult
+- (IBAction)answeredButton:(id)sender
+{
+    [self updateAnsweredWithAnswer:@YES];
+}
+
+- (IBAction)notAnsweredButton:(id)sender
+{
+    [self updateAnsweredWithAnswer:@NO];
+}
+
+- (IBAction)busyButton:(id)sender
+{
+    [self updateAnsweredWithAnswer:@NO];
+}
+
+- (void)updateAnsweredWithAnswer:(NSNumber *)answer
+{
+    // Update Contact in the current thread context
+    Contact *currentContact = [self.fetchedResultsController objectAtIndexPath:0]; //Change index!
+    currentContact.answered = answer;
+    
+    NSDate *currDate = [NSDate date];
+    currentContact.lastCall = currDate;
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated answer");
+    }];
 }
 
 - (void)didReceiveMemoryWarning

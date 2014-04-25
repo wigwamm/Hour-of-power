@@ -20,6 +20,10 @@
 @implementation DetailToCallViewController
 {
     Contact *currentContact;
+    
+    //StartStop Call
+    NSDate* start;
+    NSDate* stop;
 }
 
 @synthesize fetchedResultsController;
@@ -37,6 +41,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //NotificationFromAppDelegate
+    [self addNotifications];
     
     [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
     [[MZFormSheetBackgroundWindow appearance] setBlurRadius:5.0];
@@ -56,6 +63,29 @@
     currentContact = [fetchedResultsController objectAtIndexPath:self.index];
     
     [self fillScreen];
+}
+
+- (void)addNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(foreground)
+                                                 name: @"ForegroundNotification"
+                                               object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(background)
+                                                 name: @"BackgroundNotification"
+                                               object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(becomeActive)
+                                                 name: @"BecomeActiveNotification"
+                                               object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(resignActive)
+                                                 name: @"ResignActiveNotification"
+                                               object: nil];
 }
 
 - (void)fillScreen
@@ -116,15 +146,10 @@
     }];
 }
 
+#pragma mark - TextView
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.noteNewTextView resignFirstResponder];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -137,9 +162,57 @@
     [UIView animateWithDuration:0.5 animations:^{self.containerScrollView.contentOffset = CGPointMake(0, 0);}];
 }
 
-
-
 - (IBAction)testAction:(id)sende
+{
+    [self showPopup];
+}
+
+#pragma mark - PointStuff
+- (void)foreground
+{
+    NSLog(@"Foreground");
+    
+    stop = [NSDate date];
+    NSTimeInterval distanceBetweenDates = [stop timeIntervalSinceDate:start];
+    NSLog(@"Interval: %f", distanceBetweenDates);
+    
+    [self calculatePointWithTime:distanceBetweenDates];
+}
+
+- (void)background
+{
+    NSLog(@"Background");
+    
+    start = [NSDate date];
+    
+    //Show All PopUp
+    [self showPopup];
+}
+
+- (void)becomeActive
+{
+    NSLog(@"becomeActive");
+}
+
+- (void)resignActive
+{
+    NSLog(@"resignActive");
+}
+
+- (void)calculatePointWithTime:(NSTimeInterval)time
+{
+    if (time < 10) {
+        NSLog(@"0 point");
+    } else {
+        if (time > 6*60) {
+            NSLog(@"0 point");
+        } else {
+            NSLog(@"%i point", (int)time*10);
+        }
+    }
+}
+
+- (void)showPopup
 {
     UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"popup"];
     
@@ -168,7 +241,11 @@
     [self mz_presentFormSheetController:formSheet animated:YES completionHandler:^(MZFormSheetController *formSheetController) {}];
 }
 
-
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 /*
 #pragma mark - Navigation

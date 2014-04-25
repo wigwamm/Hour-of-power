@@ -8,7 +8,11 @@
 
 #import "NewContactViewController.h"
 
-@interface NewContactViewController ()
+#import "Contact.h"
+
+@interface NewContactViewController () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -34,6 +38,28 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark NewContact
+- (void)createNewContactWithClassification:(NSNumber *)classification
+{
+    // Create a new Photo in the current thread context
+    Contact *contact = [Contact createEntityInContext:[NSManagedObjectContext contextForCurrentThread]];
+    
+    contact.fullName = @"self.fullNameTextField.text";
+    contact.phoneNumber = @"self.phoneNumberTextField.text";
+    contact.classification = classification;
+    contact.answered = @YES;
+    
+    NSDate *currDate = [NSDate date];
+    contact.lastCall = currDate;
+    
+    contact.log = @"Description";
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Created new contact");
+    }];
 }
 
 /*

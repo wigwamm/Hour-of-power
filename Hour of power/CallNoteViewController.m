@@ -8,7 +8,11 @@
 
 #import "CallNoteViewController.h"
 
-@interface CallNoteViewController ()
+#import "Contact.h"
+
+@interface CallNoteViewController () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -34,6 +38,30 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark CallNote
+- (IBAction)callNoteSaveButton:(id)sender
+{
+    // Create a new Contact in the current thread context
+    Contact *currentContact = [self.fetchedResultsController objectAtIndexPath:0]; //Change Index!
+    currentContact.log = @"self.callNoteTextView.text";
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated call desctiption");
+    }];
+}
+
+- (void)updateContactWithClassification:(NSNumber *)classification
+{
+    Contact *currentContact = [self.fetchedResultsController objectAtIndexPath:0]; //Change Index!
+    currentContact.classification = classification;
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated classification");
+    }];
 }
 
 /*
