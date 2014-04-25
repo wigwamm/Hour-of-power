@@ -15,6 +15,7 @@
 		FC5D0038190AAC1F00928DE0 /* CallResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D0037190AAC1F00928DE0 /* CallResultViewController.m */; };
 		FC5D003D190AB00D00928DE0 /* CallNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D003C190AB00D00928DE0 /* CallNoteViewController.m */; };
 		FC5D0041190AB04100928DE0 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D0040190AB04100928DE0 /* NewContactViewController.m */; };
+		FC5D0045190AC33900928DE0 /* PopUpNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D0044190AC33900928DE0 /* PopUpNavigationViewController.m */; };
 		FC671C6218FEAE1D008AFD9F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC671C6118FEAE1D008AFD9F /* GameKit.framework */; };
 		FCA35AAF18F8558500F449B6 /* LeaderBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA35AAE18F8558500F449B6 /* LeaderBoardViewController.m */; };
 		FCA35AB418F8582D00F449B6 /* TTCounterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA35AB318F8582D00F449B6 /* TTCounterLabel.m */; };
@@ -94,6 +95,8 @@
 		FC5D003C190AB00D00928DE0 /* CallNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallNoteViewController.m; sourceTree = "<group>"; };
 		FC5D003F190AB04100928DE0 /* NewContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewContactViewController.h; sourceTree = "<group>"; };
 		FC5D0040190AB04100928DE0 /* NewContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewContactViewController.m; sourceTree = "<group>"; };
+		FC5D0043190AC33900928DE0 /* PopUpNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpNavigationViewController.h; sourceTree = "<group>"; };
+		FC5D0044190AC33900928DE0 /* PopUpNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpNavigationViewController.m; sourceTree = "<group>"; };
 		FC671C6118FEAE1D008AFD9F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		FCA35AAD18F8558500F449B6 /* LeaderBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderBoardViewController.h; sourceTree = "<group>"; };
 		FCA35AAE18F8558500F449B6 /* LeaderBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderBoardViewController.m; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 		FC5D0039190AAC2300928DE0 /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
+				FC5D0043190AC33900928DE0 /* PopUpNavigationViewController.h */,
+				FC5D0044190AC33900928DE0 /* PopUpNavigationViewController.m */,
 				FC5D003A190AAC2B00928DE0 /* CallResult */,
 				FC5D003E190AB01100928DE0 /* CallNote */,
 				FC5D0042190AB04600928DE0 /* NewContact */,
@@ -702,6 +707,7 @@
 				FCFF081D18FC46890022B444 /* MagicalRecord+Setup.m in Sources */,
 				FCFF080B18FC46890022B444 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				FC431E28190A6B4A00413DD5 /* JWBlurView.m in Sources */,
+				FC5D0045190AC33900928DE0 /* PopUpNavigationViewController.m in Sources */,
 				FC5D0038190AAC1F00928DE0 /* CallResultViewController.m in Sources */,
 				FCE52F4018F8947300E1AADF /* DetailToCallViewController.m in Sources */,
 				FC5D0041190AB04100928DE0 /* NewContactViewController.m in Sources */,

@@ -10,4 +10,8 @@
 
 @interface CallResultViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *answeredButton;
+@property (strong, nonatomic) IBOutlet UIButton *busyButton;
+@property (strong, nonatomic) IBOutlet UIButton *unansweredButton;
+
 @end

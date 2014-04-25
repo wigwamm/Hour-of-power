@@ -13,6 +13,8 @@
 #import "MZFormSheetController.h"
 #import "MZFormSheetSegue.h"
 
+#import "CallNoteViewController.h"
+
 @interface CallResultViewController () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -20,6 +22,10 @@
 @end
 
 @implementation CallResultViewController
+{
+    NSIndexPath *index;
+    Contact *currentContact;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,37 +41,44 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Call Result";
+    
+    NSNumber *indexRow = [[NSUserDefaults standardUserDefaults] objectForKey:@"IndexPathRow"];
+    NSNumber *indexSection = [[NSUserDefaults standardUserDefaults] objectForKey:@"IndexPathSection"];
+    
+    index = [NSIndexPath indexPathForItem:[indexRow intValue] inSection:[indexSection intValue]];
+    
+    self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
+                                                    ascending:YES
+                                                withPredicate:nil
+                                                      groupBy:nil
+                                                     delegate:self
+                                                    inContext:[NSManagedObjectContext contextForCurrentThread]];
+    currentContact = [self.fetchedResultsController objectAtIndexPath:index];
 }
 
 #pragma mark CallResult
 - (IBAction)answeredButton:(id)sender
 {
-    //[self updateAnsweredWithAnswer:@YES];
-    NSLog(@"Answered");
+    [self updateAnsweredWithAnswer:@YES];
 }
 
 - (IBAction)unansweredButton:(id)sender
 {
-    //[self updateAnsweredWithAnswer:@NO];
+    [self updateAnsweredWithAnswer:@NO];
     
-    [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formSheetController) {
-        // do sth
-    }];
+    [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formSheetController) {}];
 }
 
 - (IBAction)busyButton:(id)sender
 {
-    //[self updateAnsweredWithAnswer:@NO];
+    [self updateAnsweredWithAnswer:@NO];
     
-    [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formSheetController) {
-        // do sth
-    }];
+    [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formSheetController) {}];
 }
 
 - (void)updateAnsweredWithAnswer:(NSNumber *)answer
 {
     // Update Contact in the current thread context
-    Contact *currentContact = [self.fetchedResultsController objectAtIndexPath:0]; //Change index!
     currentContact.answered = answer;
     
     NSDate *currDate = [NSDate date];

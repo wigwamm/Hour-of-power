@@ -8,6 +8,9 @@
 
 #import "CallNoteViewController.h"
 
+#import "MZFormSheetController.h"
+#import "MZFormSheetSegue.h"
+
 #import "Contact.h"
 
 @interface CallNoteViewController () <NSFetchedResultsControllerDelegate>
@@ -17,6 +20,11 @@
 @end
 
 @implementation CallNoteViewController
+{
+    NSIndexPath *index;
+    
+    Contact *currentContact;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +40,51 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Call Note";
+    
+    NSNumber *indexRow = [[NSUserDefaults standardUserDefaults] objectForKey:@"IndexPathRow"];
+    NSNumber *indexSection = [[NSUserDefaults standardUserDefaults] objectForKey:@"IndexPathSection"];
+    
+    index = [NSIndexPath indexPathForItem:[indexRow intValue] inSection:[indexSection intValue]];
+    
+    self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
+                                                    ascending:YES
+                                                withPredicate:nil
+                                                      groupBy:nil
+                                                     delegate:self
+                                                    inContext:[NSManagedObjectContext contextForCurrentThread]];
+    
+    currentContact = [self.fetchedResultsController objectAtIndexPath:index];
+    
+    [self fillScreen];
+}
+
+- (void)fillScreen
+{
+    switch ([currentContact.classification intValue]) {
+        case 0:
+            self.classificationSegmentedControl.selectedSegmentIndex = 0;
+            break;
+            
+        case 1:
+            self.classificationSegmentedControl.selectedSegmentIndex = 1;
+            break;
+            
+        case 2:
+            self.classificationSegmentedControl.selectedSegmentIndex = 2;
+            break;
+            
+        case 3:
+            self.classificationSegmentedControl.selectedSegmentIndex = 3;
+            break;
+            
+        case 4:
+            self.classificationSegmentedControl.selectedSegmentIndex = 4;
+            break;
+            
+        default:
+            self.classificationSegmentedControl.selectedSegmentIndex = 0;
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,24 +97,45 @@
 - (IBAction)callNoteSaveButton:(id)sender
 {
     // Create a new Contact in the current thread context
-    Contact *currentContact = [self.fetchedResultsController objectAtIndexPath:0]; //Change Index!
-    currentContact.log = @"self.callNoteTextView.text";
+    currentContact.log = self.callNoteTextView.text;
     
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated call desctiption");
+        
+        //Dismiss PopUp
+        [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formSheetController) {}];
+        
+    }];
+}
+
+- (IBAction)classificationAction:(id)sender
+{
+    NSInteger selectedSegmentIndex = [self.classificationSegmentedControl selectedSegmentIndex];
+    NSString *selectedSegmentTitle = [self.classificationSegmentedControl titleForSegmentAtIndex: selectedSegmentIndex];
+    
+    NSLog(@"%li %@", (long)selectedSegmentIndex, selectedSegmentTitle);
+    
+    currentContact.classification = [NSNumber numberWithLong:selectedSegmentIndex];
+    
+    // Save the modification in the local context
+    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        NSLog(@"Updated classification");
+    }];
+}
+
+- (IBAction)newContact:(id)sender
+{
+    currentContact.log = self.callNoteTextView.text;
     // Save the modification in the local context
     [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         NSLog(@"Updated call desctiption");
     }];
 }
 
-- (void)updateContactWithClassification:(NSNumber *)classification
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    Contact *currentContact = [self.fetchedResultsController objectAtIndexPath:0]; //Change Index!
-    currentContact.classification = classification;
-    
-    // Save the modification in the local context
-    [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        NSLog(@"Updated classification");
-    }];
+    [self.callNoteTextView resignFirstResponder];
 }
 
 /*

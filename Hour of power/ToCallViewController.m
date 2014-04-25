@@ -85,7 +85,7 @@
                                                    delegate:self
                                                   inContext:[NSManagedObjectContext contextForCurrentThread]];
     
-    [self rankingUsers];
+//    [self rankingUsers];
     
     //PickerView
     //self.pickerView = [[AKPickerView alloc] initWithFrame:self.view.bounds];
@@ -308,6 +308,11 @@
     fullName = [NSString stringWithFormat:@"%@", currentContact.fullName];
     phoneNumberSelected = [NSString stringWithFormat:@"%@", currentContact.phoneNumber];
     indexToSend = indexPath;
+    
+    //SaveIndex In NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:@"IndexPathRow"];
+    [[NSUserDefaults standardUserDefaults] setInteger:indexPath.section forKey:@"IndexPathSection"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     UIStoryboardSegue *segue = [[UIStoryboardSegue alloc] initWithIdentifier:@"detail" source:self destination:[[DetailToCallViewController alloc] init]];
 

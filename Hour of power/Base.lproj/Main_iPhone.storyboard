@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Pop Up Navigation View Controller-->
         <scene sceneID="mch-G5-CGn">
             <objects>
-                <navigationController storyboardIdentifier="popup" definesPresentationContext="YES" id="iTt-XS-mVj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="popup" definesPresentationContext="YES" id="iTt-XS-mVj" customClass="PopUpNavigationViewController" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="253"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hFV-1o-OCd">
@@ -61,7 +61,7 @@
                                 </state>
                                 <connections>
                                     <action selector="answeredButton:" destination="VRr-D4-Fe4" eventType="touchUpInside" id="r6e-U4-ktp"/>
-                                    <segue destination="1nu-Hh-HKP" kind="push" id="6Pd-ub-pfa"/>
+                                    <segue destination="1nu-Hh-HKP" kind="push" identifier="call_note" id="6Pd-ub-pfa"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -71,6 +71,11 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="253"/>
+                    <connections>
+                        <outlet property="answeredButton" destination="zCb-gy-opU" id="4Ls-kG-8p4"/>
+                        <outlet property="busyButton" destination="gzN-qc-DLB" id="uae-9u-Hnx"/>
+                        <outlet property="unansweredButton" destination="sfc-nb-jMg" id="oM3-v7-anr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTw-XW-ik2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -475,7 +480,7 @@
         <!--Call Note View Controller-->
         <scene sceneID="bkx-nM-MV8">
             <objects>
-                <viewController id="1nu-Hh-HKP" customClass="CallNoteViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CallNoteViewController" id="1nu-Hh-HKP" customClass="CallNoteViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iBK-Co-oyg"/>
                         <viewControllerLayoutGuide type="bottom" id="Cmr-R3-Fe5"/>
@@ -494,15 +499,18 @@
                                     <segment title="Q"/>
                                     <segment title="Y"/>
                                 </segments>
+                                <connections>
+                                    <action selector="classificationAction:" destination="1nu-Hh-HKP" eventType="valueChanged" id="1nR-wL-6f6"/>
+                                </connections>
                             </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Call note:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKp-rz-3S0">
-                                <rect key="frame" x="112" y="56" width="77" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next call date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKp-rz-3S0">
+                                <rect key="frame" x="20" y="56" width="260" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7wd-ZT-Wya">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Call note:" translatesAutoresizingMaskIntoConstraints="NO" id="7wd-ZT-Wya">
                                 <rect key="frame" x="20" y="85" width="260" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.25116635339999999" green="0.8841975983" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
@@ -515,6 +523,9 @@
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="callNoteSaveButton:" destination="1nu-Hh-HKP" eventType="touchUpInside" id="PON-20-ZAz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fI-L1-r0A">
                                 <rect key="frame" x="192" y="203" width="88" height="30"/>
@@ -523,6 +534,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="newContact:" destination="1nu-Hh-HKP" eventType="touchUpInside" id="Zpz-xM-tzb"/>
                                     <segue destination="r2W-ai-bwb" kind="push" id="rpQ-GN-wGB"/>
                                 </connections>
                             </button>
@@ -533,6 +545,12 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="253"/>
+                    <connections>
+                        <outlet property="addNewContactButton" destination="5fI-L1-r0A" id="sQ4-5U-a4N"/>
+                        <outlet property="callNoteTextView" destination="7wd-ZT-Wya" id="d36-zg-AqN"/>
+                        <outlet property="classificationSegmentedControl" destination="BYu-vR-QLV" id="jZY-HB-wa3"/>
+                        <outlet property="justSaveButton" destination="dd8-bQ-f4m" id="bXB-C8-ZWa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNL-ez-xA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -551,7 +569,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uMe-Na-c1b">
-                                <rect key="frame" x="20" y="149" width="260" height="29"/>
+                                <rect key="frame" x="20" y="113" width="260" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="D"/>
@@ -562,13 +580,13 @@
                                 </segments>
                             </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2So-Xr-8c6">
-                                <rect key="frame" x="20" y="61" width="260" height="30"/>
+                                <rect key="frame" x="20" y="20" width="260" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7td-Zw-Bih">
-                                <rect key="frame" x="20" y="99" width="260" height="30"/>
+                                <rect key="frame" x="20" y="58" width="260" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -579,7 +597,17 @@
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveAction:" destination="r2W-ai-bwb" eventType="touchUpInside" id="5RE-jE-bhf"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next call date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnf-1G-tvj">
+                                <rect key="frame" x="20" y="158" width="260" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -587,6 +615,12 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="253"/>
+                    <connections>
+                        <outlet property="classificationSegmentedControl" destination="uMe-Na-c1b" id="kfz-cd-Pt5"/>
+                        <outlet property="fullNameTextField" destination="7td-Zw-Bih" id="Drd-3h-mLy"/>
+                        <outlet property="phoneNumberTextField" destination="2So-Xr-8c6" id="ZL6-aI-2OZ"/>
+                        <outlet property="saveButton" destination="Ikf-1J-ax3" id="6df-ff-RcJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ujm-vP-AaU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
