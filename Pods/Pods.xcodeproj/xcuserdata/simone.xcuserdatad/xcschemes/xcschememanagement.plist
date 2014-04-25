@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-MZAppearance.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MZFormSheetController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ODRefreshControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1A2A5AC46982450E9DE60F00</key>
+		<key>5B950055F145488B962B9591</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD255E95B30C4E0DB10E68DD</key>
+		<key>7D60C7B266114BF4BFE102EB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E414B0F8BB9C4B4E8E9A2FF5</key>
+		<key>7F3C8A737F5646FCBAB118B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9C745B704BFC43029FAC1D48</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF33738A2BC74EFF9EE09310</key>
 		<dict>
 			<key>primary</key>
 			<true/>

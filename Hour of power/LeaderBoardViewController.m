@@ -159,8 +159,7 @@
     if (shouldShowLeaderboard) {
         gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
         gcViewController.leaderboardIdentifier = self.leaderboardIdentifier;
-    }
-    else{
+    } else{
         gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
     }
     

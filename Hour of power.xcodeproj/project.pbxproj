@@ -12,6 +12,9 @@
 		FC2030FE18F71CBE0003EFF6 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2030FD18F71CBE0003EFF6 /* AddressBook.framework */; };
 		FC431E28190A6B4A00413DD5 /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC431E27190A6B4A00413DD5 /* JWBlurView.m */; };
 		FC431E2B190A71E900413DD5 /* edit_user.png in Resources */ = {isa = PBXBuildFile; fileRef = FC431E2A190A71E900413DD5 /* edit_user.png */; };
+		FC5D0038190AAC1F00928DE0 /* CallResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D0037190AAC1F00928DE0 /* CallResultViewController.m */; };
+		FC5D003D190AB00D00928DE0 /* CallNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D003C190AB00D00928DE0 /* CallNoteViewController.m */; };
+		FC5D0041190AB04100928DE0 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D0040190AB04100928DE0 /* NewContactViewController.m */; };
 		FC671C6218FEAE1D008AFD9F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC671C6118FEAE1D008AFD9F /* GameKit.framework */; };
 		FCA35AAF18F8558500F449B6 /* LeaderBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA35AAE18F8558500F449B6 /* LeaderBoardViewController.m */; };
 		FCA35AB418F8582D00F449B6 /* TTCounterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA35AB318F8582D00F449B6 /* TTCounterLabel.m */; };
@@ -85,6 +88,12 @@
 		FC431E26190A6B4A00413DD5 /* JWBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWBlurView.h; sourceTree = "<group>"; };
 		FC431E27190A6B4A00413DD5 /* JWBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWBlurView.m; sourceTree = "<group>"; };
 		FC431E2A190A71E900413DD5 /* edit_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit_user.png; sourceTree = "<group>"; };
+		FC5D0036190AAC1F00928DE0 /* CallResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallResultViewController.h; sourceTree = "<group>"; };
+		FC5D0037190AAC1F00928DE0 /* CallResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallResultViewController.m; sourceTree = "<group>"; };
+		FC5D003B190AB00D00928DE0 /* CallNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallNoteViewController.h; sourceTree = "<group>"; };
+		FC5D003C190AB00D00928DE0 /* CallNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallNoteViewController.m; sourceTree = "<group>"; };
+		FC5D003F190AB04100928DE0 /* NewContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewContactViewController.h; sourceTree = "<group>"; };
+		FC5D0040190AB04100928DE0 /* NewContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewContactViewController.m; sourceTree = "<group>"; };
 		FC671C6118FEAE1D008AFD9F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		FCA35AAD18F8558500F449B6 /* LeaderBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderBoardViewController.h; sourceTree = "<group>"; };
 		FCA35AAE18F8558500F449B6 /* LeaderBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderBoardViewController.m; sourceTree = "<group>"; };
@@ -224,6 +233,43 @@
 				FC431E27190A6B4A00413DD5 /* JWBlurView.m */,
 			);
 			name = JWBlur;
+			sourceTree = "<group>";
+		};
+		FC5D0039190AAC2300928DE0 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				FC5D003A190AAC2B00928DE0 /* CallResult */,
+				FC5D003E190AB01100928DE0 /* CallNote */,
+				FC5D0042190AB04600928DE0 /* NewContact */,
+			);
+			name = PopUp;
+			sourceTree = "<group>";
+		};
+		FC5D003A190AAC2B00928DE0 /* CallResult */ = {
+			isa = PBXGroup;
+			children = (
+				FC5D0036190AAC1F00928DE0 /* CallResultViewController.h */,
+				FC5D0037190AAC1F00928DE0 /* CallResultViewController.m */,
+			);
+			name = CallResult;
+			sourceTree = "<group>";
+		};
+		FC5D003E190AB01100928DE0 /* CallNote */ = {
+			isa = PBXGroup;
+			children = (
+				FC5D003B190AB00D00928DE0 /* CallNoteViewController.h */,
+				FC5D003C190AB00D00928DE0 /* CallNoteViewController.m */,
+			);
+			name = CallNote;
+			sourceTree = "<group>";
+		};
+		FC5D0042190AB04600928DE0 /* NewContact */ = {
+			isa = PBXGroup;
+			children = (
+				FC5D003F190AB04100928DE0 /* NewContactViewController.h */,
+				FC5D0040190AB04100928DE0 /* NewContactViewController.m */,
+			);
+			name = NewContact;
 			sourceTree = "<group>";
 		};
 		FCA35AB018F8558900F449B6 /* LeaderBoard */ = {
@@ -370,6 +416,7 @@
 				FCE52F3E18F8947300E1AADF /* DetailToCallViewController.h */,
 				FCE52F3F18F8947300E1AADF /* DetailToCallViewController.m */,
 				FC431E2A190A71E900413DD5 /* edit_user.png */,
+				FC5D0039190AAC2300928DE0 /* PopUp */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -655,8 +702,11 @@
 				FCFF081D18FC46890022B444 /* MagicalRecord+Setup.m in Sources */,
 				FCFF080B18FC46890022B444 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				FC431E28190A6B4A00413DD5 /* JWBlurView.m in Sources */,
+				FC5D0038190AAC1F00928DE0 /* CallResultViewController.m in Sources */,
 				FCE52F4018F8947300E1AADF /* DetailToCallViewController.m in Sources */,
+				FC5D0041190AB04100928DE0 /* NewContactViewController.m in Sources */,
 				FCFF081618FC46890022B444 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
+				FC5D003D190AB00D00928DE0 /* CallNoteViewController.m in Sources */,
 				FCFF080918FC46890022B444 /* NSNumber+MagicalDataImport.m in Sources */,
 				FCB83B8D19005C6200B972C2 /* AKPickerView.m in Sources */,
 				FCFF080F18FC46890022B444 /* NSManagedObject+MagicalFinders.m in Sources */,

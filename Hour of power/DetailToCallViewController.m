@@ -8,9 +8,12 @@
 
 #import "DetailToCallViewController.h"
 
+#import "MZFormSheetController.h"
+#import "MZFormSheetSegue.h"
+
 #import "Contact.h"
 
-@interface DetailToCallViewController ()
+@interface DetailToCallViewController () <MZFormSheetBackgroundWindowDelegate>
 
 @end
 
@@ -35,8 +38,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
+    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:5.0];
+    
     self.noteNewTextView.layer.borderWidth = 1.0f;
-    self.noteNewTextView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.noteNewTextView.layer.borderColor = [[UIColor colorWithWhite:0.500 alpha:0.680] CGColor];
     
     self.noteNewTextView.delegate = self;
     
@@ -130,6 +136,39 @@
 {
     [UIView animateWithDuration:0.5 animations:^{self.containerScrollView.contentOffset = CGPointMake(0, 0);}];
 }
+
+
+
+- (IBAction)testAction:(id)sende
+{
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"popup"];
+    
+    MZFormSheetController *formSheet = [[MZFormSheetController alloc] initWithViewController:vc];
+    
+    formSheet.presentedFormSheetSize = CGSizeMake(300, 298);
+    formSheet.transitionStyle = MZFormSheetTransitionStyleFade;
+    //    formSheet.transitionStyle = MZFormSheetTransitionStyleSlideFromTop;
+    formSheet.shadowRadius = 2.0;
+    formSheet.shadowOpacity = 0.3;
+    formSheet.shouldDismissOnBackgroundViewTap = YES;
+    formSheet.shouldCenterVertically = YES;
+    formSheet.movementWhenKeyboardAppears = MZFormSheetWhenKeyboardAppearsCenterVertically;
+    //    formSheet.landscapeTopInset = 50;
+    //    formSheet.portraitTopInset = 100;
+    
+    formSheet.willPresentCompletionHandler = ^(UIViewController *presentedFSViewController) {
+        // Passing data
+        //        UINavigationController *navController = (UINavigationController *)presentedFSViewController;
+        //        navController.topViewController.title = @"PASSING DATA";
+    };
+    
+    
+    [MZFormSheetController sharedBackgroundWindow].formSheetBackgroundWindowDelegate = self;
+    
+    [self mz_presentFormSheetController:formSheet animated:YES completionHandler:^(MZFormSheetController *formSheetController) {}];
+}
+
+
 
 /*
 #pragma mark - Navigation
