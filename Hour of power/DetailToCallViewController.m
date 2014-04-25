@@ -53,6 +53,13 @@
     
     self.noteNewTextView.delegate = self;
     
+    [self fetchUser];
+    
+    [self fillScreen];
+}
+
+- (void)fetchUser
+{
     self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
                                                     ascending:YES
                                                 withPredicate:nil
@@ -61,8 +68,6 @@
                                                     inContext:[NSManagedObjectContext contextForCurrentThread]];
     
     currentContact = [fetchedResultsController objectAtIndexPath:self.index];
-    
-    [self fillScreen];
 }
 
 - (void)addNotifications
@@ -215,14 +220,14 @@
     
     formSheet.presentedFormSheetSize = CGSizeMake(300, 298);
     formSheet.transitionStyle = MZFormSheetTransitionStyleFade;
-    //    formSheet.transitionStyle = MZFormSheetTransitionStyleSlideFromTop;
+//    formSheet.transitionStyle = MZFormSheetTransitionStyleSlideFromTop;
     formSheet.shadowRadius = 2.0;
     formSheet.shadowOpacity = 0.3;
     formSheet.shouldDismissOnBackgroundViewTap = NO;
     formSheet.shouldCenterVertically = YES;
     formSheet.movementWhenKeyboardAppears = MZFormSheetWhenKeyboardAppearsCenterVertically;
-    //    formSheet.landscapeTopInset = 50;
-    //    formSheet.portraitTopInset = 100;
+//    formSheet.landscapeTopInset = 50;
+//    formSheet.portraitTopInset = 100;
     
     formSheet.willPresentCompletionHandler = ^(UIViewController *presentedFSViewController) {
         // Passing data
@@ -231,6 +236,10 @@
 //        CallResultViewController *modalVc = (CallResultViewController *)navController.topViewController;
     };
     
+    formSheet.didDismissCompletionHandler = ^(UIViewController *presentedFSViewController) {
+        [self fetchUser];
+        [self fillScreen];
+    };
     
     [MZFormSheetController sharedBackgroundWindow].formSheetBackgroundWindowDelegate = self;
     
