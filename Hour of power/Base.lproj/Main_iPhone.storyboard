@@ -118,7 +118,7 @@
                                     <outlet property="delegate" destination="CZ4-MO-1fc" id="RpQ-Ly-MMp"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0j-uI-iAL" customClass="TTCounterLabel">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0j-uI-iAL" customClass="TTCounterLabel">
                                 <rect key="frame" x="265" y="63" width="55" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -133,8 +133,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7jl-Pm-Jck" firstAttribute="trailing" secondItem="O0j-uI-iAL" secondAttribute="trailing" id="7Hf-8u-Wlq"/>
-                            <constraint firstItem="7jl-Pm-Jck" firstAttribute="top" secondItem="O0j-uI-iAL" secondAttribute="top" id="EXF-Ls-dW1"/>
                             <constraint firstAttribute="trailing" secondItem="7jl-Pm-Jck" secondAttribute="trailing" id="En1-y2-WFw"/>
                             <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="8DA-50-Pff" secondAttribute="bottom" id="F1B-Se-TnL"/>
                             <constraint firstItem="7jl-Pm-Jck" firstAttribute="top" secondItem="s9W-kb-ARv" secondAttribute="bottom" constant="-64" id="GyN-3g-g0e"/>
