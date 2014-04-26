@@ -125,7 +125,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8DA-50-Pff" customClass="JWBlurView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8DA-50-Pff" customClass="JWBlurView">
                                 <rect key="frame" x="0.0" y="480" width="320" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -133,6 +133,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="8DA-50-Pff" secondAttribute="bottom" id="F1B-Se-TnL"/>
                             <constraint firstItem="7jl-Pm-Jck" firstAttribute="top" secondItem="s9W-kb-ARv" secondAttribute="bottom" constant="-64" id="GyN-3g-g0e"/>
                             <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="7jl-Pm-Jck" secondAttribute="bottom" id="vxL-o0-Pmr"/>
                         </constraints>

@@ -90,9 +90,10 @@
     //PickerView
     //self.pickerView = [[AKPickerView alloc] initWithFrame:self.view.bounds];
     //self.pickerView = [[AKPickerView alloc] initWithFrame:CGRectMake(0, 470, self.view.frame.size.width, 40)];
-    self.pickerView = [[AKPickerView alloc] initWithFrame:CGRectMake(0, 480, self.view.frame.size.width, 40)];
+    self.pickerView = [[AKPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
 	self.pickerView.delegate = self;
-	[self.view addSubview:self.pickerView];
+    
+    [self.blurView addSubview:self.pickerView];
     
 	self.titles = @[@"Today",
 					@"Tomorrow",
