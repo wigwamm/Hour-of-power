@@ -79,18 +79,16 @@
     contacts = [NSMutableArray array];
     
     self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
-                                                  ascending:YES
-                                              withPredicate:nil
-                                                    groupBy:nil
-                                                   delegate:self
-                                                  inContext:[NSManagedObjectContext contextForCurrentThread]];
+                                                    ascending:YES
+                                                withPredicate:nil
+                                                      groupBy:nil
+                                                     delegate:self
+                                                    inContext:[NSManagedObjectContext contextForCurrentThread]];
     
 //    [self rankingUsers];
     
     //PickerView
-    //self.pickerView = [[AKPickerView alloc] initWithFrame:self.view.bounds];
-    //self.pickerView = [[AKPickerView alloc] initWithFrame:CGRectMake(0, 470, self.view.frame.size.width, 40)];
-    self.pickerView = [[AKPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    self.pickerView = [[AKPickerView alloc] initWithFrame:self.blurView.bounds];
 	self.pickerView.delegate = self;
     
     [self.blurView addSubview:self.pickerView];
@@ -105,18 +103,6 @@
     
     //AddressBook
     [self getAddressBookAuthorization];
-    
-//    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"addressBookSwitch"]) {
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"addressBookSwitch"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        [self getAddressBookAuthorization];
-//    } else {
-//        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"addressBookSwitch"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
-//            [self getAddressBookAuthorization];
-//        } else {
-//            NSLog(@"Address book sync disabled");
-//        }
-//    }
 }
 
 - (void)rankingUsers
@@ -227,7 +213,6 @@
 - (void)getContact
 {
     // Setup App with prefilled contact.
-    //if (![[NSUserDefaults standardUserDefaults] objectForKey:@"HasPrefilledContacts"]) {
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"HasPrefilledContacts"]) {
         
         CFErrorRef *error = NULL;
@@ -407,50 +392,8 @@
     
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     
-    //Button call
-//    UIButton *callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [callBtn setFrame:CGRectMake(10,10,20,20)];
-//    callBtn.tag = indexPath.row;
-//    [callBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-//
-//    //newBtn.backgroundColor = [UIColor greenColor];
-//
-//    [callBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
-//    [callBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
-//
-//    [cell addSubview:callBtn];
-    //-------------
-
-    //Button weekly
-//    UIButton *weeklyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [weeklyBtn setFrame:CGRectMake(190,10,20,20)];
-//    weeklyBtn.tag = indexPath.row;
-//    [weeklyBtn addTarget:self action:@selector(btnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-//
-//    weeklyBtn.layer.cornerRadius = 5;
-//    weeklyBtn.backgroundColor = [UIColor greenColor];
-//    [weeklyBtn setTitle:@"W" forState:UIControlStateNormal];
-//    [weeklyBtn setTitle:@"W" forState:UIControlStateHighlighted];
-//
-////    [weeklyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateNormal];
-////    [weeklyBtn setBackgroundImage:[UIImage imageNamed:@"call.png"] forState:UIControlStateHighlighted];
-//    
-//    [cell addSubview:weeklyBtn];
-    //-------------
-    
 	return cell;
 }
-
-//- (void)btnCommentClick:(id)sender
-//{
-//    UIButton *senderButton = (UIButton *)sender;
-//    NSIndexPath *path = [NSIndexPath indexPathForRow:senderButton.tag inSection:0];
-//
-//    Contact *currentContact = [fetchedResultsController objectAtIndexPath:path];
-//    NSString *number = [NSString stringWithFormat:@"%@", currentContact.phoneNumber];
-//
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",[number stringByReplacingOccurrencesOfString:@" " withString:@""]]]];
-//}
 
 #pragma mark - NSFetchedResultsController Delegate Methods
 
