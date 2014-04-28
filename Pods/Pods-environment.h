@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_MZFormSheetController 3
 #define COCOAPODS_VERSION_PATCH_MZFormSheetController 4
 
+// NSDate+Calendar
+#define COCOAPODS_POD_AVAILABLE_NSDate_Calendar
+#define COCOAPODS_VERSION_MAJOR_NSDate_Calendar 0
+#define COCOAPODS_VERSION_MINOR_NSDate_Calendar 0
+#define COCOAPODS_VERSION_PATCH_NSDate_Calendar 4
+
 // ODRefreshControl
 #define COCOAPODS_POD_AVAILABLE_ODRefreshControl
 #define COCOAPODS_VERSION_MAJOR_ODRefreshControl 1

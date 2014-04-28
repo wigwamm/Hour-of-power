@@ -105,6 +105,7 @@
     [self getAddressBookAuthorization];
 }
 
+#warning Fix Ranking
 - (void)rankingUsers
 {
     NSArray *datess = [CallDate findAll];

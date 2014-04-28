@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-NSDate+Calendar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ODRefreshControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,57 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>25327EB1172040A6A0A895F8</key>
+		<key>0C4BD2FFEA474EAC855E9367</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2B407BCF72EB474385767FA8</key>
+		<key>68602DA7E5A34AB28D91E1EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2ECD7FB84AF34269B0856807</key>
+		<key>8F40944C97F04ABB812AFAFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B950055F145488B962B9591</key>
+		<key>A7699A932F3F4078A324F909</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D60C7B266114BF4BFE102EB</key>
+		<key>CE57471495364CB8AC86277A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7F3C8A737F5646FCBAB118B3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>88F52EE9D1684EE792EBC51A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9C745B704BFC43029FAC1D48</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C450F06F88094C4D8002B275</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CF33738A2BC74EFF9EE09310</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D77B40AB414F46FBAC523EF6</key>
+		<key>DE7648A474654F93A8BB8758</key>
 		<dict>
 			<key>primary</key>
 			<true/>

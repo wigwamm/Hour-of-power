@@ -561,6 +561,7 @@
                         <outlet property="callNoteTextView" destination="7wd-ZT-Wya" id="d36-zg-AqN"/>
                         <outlet property="classificationSegmentedControl" destination="BYu-vR-QLV" id="jZY-HB-wa3"/>
                         <outlet property="justSaveButton" destination="dd8-bQ-f4m" id="bXB-C8-ZWa"/>
+                        <outlet property="nextCallDateLabel" destination="qKp-rz-3S0" id="HmF-ve-51y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNL-ez-xA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -589,6 +590,9 @@
                                     <segment title="Q"/>
                                     <segment title="Y"/>
                                 </segments>
+                                <connections>
+                                    <action selector="classificationAction:" destination="r2W-ai-bwb" eventType="valueChanged" id="SPU-If-Tyq"/>
+                                </connections>
                             </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2So-Xr-8c6">
                                 <rect key="frame" x="20" y="20" width="260" height="30"/>
@@ -629,6 +633,7 @@
                     <connections>
                         <outlet property="classificationSegmentedControl" destination="uMe-Na-c1b" id="kfz-cd-Pt5"/>
                         <outlet property="fullNameTextField" destination="7td-Zw-Bih" id="Drd-3h-mLy"/>
+                        <outlet property="nextCallDateLabel" destination="Wnf-1G-tvj" id="Igc-j2-rhj"/>
                         <outlet property="phoneNumberTextField" destination="2So-Xr-8c6" id="ZL6-aI-2OZ"/>
                         <outlet property="saveButton" destination="Ikf-1J-ax3" id="6df-ff-RcJ"/>
                     </connections>

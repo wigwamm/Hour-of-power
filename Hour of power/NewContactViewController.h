@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *phoneNumberTextField;
 @property (strong, nonatomic) IBOutlet UITextField *fullNameTextField;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *classificationSegmentedControl;
+@property (strong, nonatomic) IBOutlet UILabel *nextCallDateLabel;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 
 @end
