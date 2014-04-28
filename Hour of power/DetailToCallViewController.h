@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *logLabel;
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *classificationSegmentedControl;
+@property (strong, nonatomic) IBOutlet UILabel *nextCallDateLabel;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *containerScrollView;
 

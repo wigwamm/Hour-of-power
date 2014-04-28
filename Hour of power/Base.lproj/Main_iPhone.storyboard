@@ -184,8 +184,15 @@
                                     <action selector="classificationSegmentedAction:" destination="W12-BN-LZ6" eventType="valueChanged" id="ch4-4T-c2D"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next call date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJH-MQ-PFD">
+                                <rect key="frame" x="20" y="114" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vCS-oL-Gxz">
-                                <rect key="frame" x="0.0" y="123" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="143" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="edit_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="eqC-dB-sLE">
@@ -268,7 +275,7 @@
                                 <color key="backgroundColor" red="0.9450981021" green="0.9450981021" blue="0.9450981021" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lc8-gI-d9Z">
-                                <rect key="frame" x="0.0" y="223" width="320" height="232"/>
+                                <rect key="frame" x="0.0" y="243" width="320" height="232"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jft-zU-JLi">
@@ -326,6 +333,7 @@
                         <outlet property="containerScrollView" destination="Lc8-gI-d9Z" id="ZN7-ql-dtI"/>
                         <outlet property="lastCallLabel" destination="nAa-aR-Yro" id="yOr-jE-PVw"/>
                         <outlet property="logLabel" destination="ccx-b9-LRB" id="QfK-ID-INF"/>
+                        <outlet property="nextCallDateLabel" destination="oJH-MQ-PFD" id="aKu-Mv-2gO"/>
                         <outlet property="noteNewTextView" destination="c0o-47-OWK" id="0xr-Nc-O5k"/>
                         <outlet property="phoneNumberLabel" destination="jft-zU-JLi" id="WkR-Pw-f0H"/>
                     </connections>
