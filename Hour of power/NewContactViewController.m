@@ -15,9 +15,7 @@
 
 #import <NSDate+Calendar.h>
 
-@interface NewContactViewController () <NSFetchedResultsControllerDelegate>
-
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@interface NewContactViewController ()
 
 @end
 
@@ -52,12 +50,16 @@
 //    
 //    NSLog(@"NewContact index: %@", index);
 //    
-//    self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
-//                                                    ascending:YES
-//                                                withPredicate:nil
-//                                                      groupBy:nil
-//                                                     delegate:self
-//                                                    inContext:[NSManagedObjectContext contextForCurrentThread]];
+//    if (index.section == 0) {
+//        
+//        NSArray *peoples = [Contact findAllSortedBy:@"classification" ascending:NO withPredicate:[NSPredicate predicateWithFormat:@"(nextCall == %@)", [[NSDate date] dateToday]]];
+//        currentContact = peoples[index.row];
+//        
+//    } else if (index.section == 1) {
+//        
+//        NSArray *peoples = [Contact findAllSortedBy:@"fullName" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"(nextCall > %@)", [[NSDate date] dateToday]]];
+//        currentContact = peoples[index.row];
+//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,12 +126,17 @@
     
     NSDate *currDate = [NSDate date];
     contact.lastCall = currDate;
+    contact.nextCall = currDate;
     
     contact.log = @"Description";
     
     // Save the modification in the local context
     [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         NSLog(@"Created new contact");
+        
+        // NUMBER NEW CONTACT TODAY
+        [[NSUserDefaults standardUserDefaults] setInteger:([[[NSUserDefaults standardUserDefaults] objectForKey:@"nNewContactToday"] integerValue] + 1) forKey:@"nNewContactToday"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         //Dismiss PopUp
         [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formSheetController) {}];
