@@ -17,6 +17,8 @@
 		FC5D0041190AB04100928DE0 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D0040190AB04100928DE0 /* NewContactViewController.m */; };
 		FC5D0045190AC33900928DE0 /* PopUpNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D0044190AC33900928DE0 /* PopUpNavigationViewController.m */; };
 		FC671C6218FEAE1D008AFD9F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC671C6118FEAE1D008AFD9F /* GameKit.framework */; };
+		FC8C0DAA19114CA100621839 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8C0DA919114CA100621839 /* white.png */; };
+		FC8C0DB01912759B00621839 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8C0DAF1912759B00621839 /* Contact.m */; };
 		FCA35AAF18F8558500F449B6 /* LeaderBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA35AAE18F8558500F449B6 /* LeaderBoardViewController.m */; };
 		FCA35AB418F8582D00F449B6 /* TTCounterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA35AB318F8582D00F449B6 /* TTCounterLabel.m */; };
 		FCB83B8D19005C6200B972C2 /* AKPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB83B8C19005C6200B972C2 /* AKPickerView.m */; };
@@ -65,8 +67,6 @@
 		FCFF081F18FC46890022B444 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF080118FC46890022B444 /* MagicalRecord.m */; };
 		FCFF082118FC47A00022B444 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFF082018FC47A00022B444 /* CoreData.framework */; };
 		FCFF082718FC48150022B444 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCFF082518FC48150022B444 /* Model.xcdatamodeld */; };
-		FCFF54591907EF4600081E74 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF54581907EF4600081E74 /* Contact.m */; };
-		FCFF545C1907EF4600081E74 /* CallDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF545B1907EF4600081E74 /* CallDate.m */; };
 		FCFF547019094D4F00081E74 /* call_Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFF546F19094D4F00081E74 /* call_Orange.png */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +98,9 @@
 		FC5D0043190AC33900928DE0 /* PopUpNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpNavigationViewController.h; sourceTree = "<group>"; };
 		FC5D0044190AC33900928DE0 /* PopUpNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpNavigationViewController.m; sourceTree = "<group>"; };
 		FC671C6118FEAE1D008AFD9F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		FC8C0DA919114CA100621839 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
+		FC8C0DAE1912759B00621839 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		FC8C0DAF1912759B00621839 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		FCA35AAD18F8558500F449B6 /* LeaderBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderBoardViewController.h; sourceTree = "<group>"; };
 		FCA35AAE18F8558500F449B6 /* LeaderBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderBoardViewController.m; sourceTree = "<group>"; };
 		FCA35AB218F8582D00F449B6 /* TTCounterLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCounterLabel.h; sourceTree = "<group>"; };
@@ -185,10 +188,6 @@
 		FCFF080518FC46890022B444 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		FCFF082018FC47A00022B444 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		FCFF082618FC48150022B444 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		FCFF54571907EF4600081E74 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		FCFF54581907EF4600081E74 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		FCFF545A1907EF4600081E74 /* CallDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallDate.h; sourceTree = "<group>"; };
-		FCFF545B1907EF4600081E74 /* CallDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallDate.m; sourceTree = "<group>"; };
 		FCFF546F19094D4F00081E74 /* call_Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_Orange.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -399,6 +398,7 @@
 			children = (
 				FCC5F99E18F6FB65007F5A62 /* ToCallViewController.h */,
 				FCC5F99F18F6FB65007F5A62 /* ToCallViewController.m */,
+				FC8C0DA919114CA100621839 /* white.png */,
 				FCE52F4118F8947700E1AADF /* Detail */,
 			);
 			name = ToCall;
@@ -408,10 +408,8 @@
 			isa = PBXGroup;
 			children = (
 				FCFF082518FC48150022B444 /* Model.xcdatamodeld */,
-				FCFF545A1907EF4600081E74 /* CallDate.h */,
-				FCFF545B1907EF4600081E74 /* CallDate.m */,
-				FCFF54571907EF4600081E74 /* Contact.h */,
-				FCFF54581907EF4600081E74 /* Contact.m */,
+				FC8C0DAE1912759B00621839 /* Contact.h */,
+				FC8C0DAF1912759B00621839 /* Contact.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -621,6 +619,7 @@
 				FCC5F97618F6A515007F5A62 /* Images.xcassets in Resources */,
 				FCFF547019094D4F00081E74 /* call_Orange.png in Resources */,
 				FCC5F96B18F6A515007F5A62 /* Main_iPhone.storyboard in Resources */,
+				FC8C0DAA19114CA100621839 /* white.png in Resources */,
 				FC431E2B190A71E900413DD5 /* edit_user.png in Resources */,
 				FCC5F96218F6A515007F5A62 /* InfoPlist.strings in Resources */,
 			);
@@ -690,9 +689,7 @@
 				FC2030F718F70D540003EFF6 /* HelpViewController.m in Sources */,
 				FCFF080618FC46890022B444 /* MagicalImportFunctions.m in Sources */,
 				FCFF081018FC46890022B444 /* NSManagedObject+MagicalRecord.m in Sources */,
-				FCFF54591907EF4600081E74 /* Contact.m in Sources */,
 				FCFF081418FC46890022B444 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
-				FCFF545C1907EF4600081E74 /* CallDate.m in Sources */,
 				FCFF081A18FC46890022B444 /* MagicalRecord+ErrorHandling.m in Sources */,
 				FCFF081818FC46890022B444 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				FCFF080E18FC46890022B444 /* NSManagedObject+MagicalDataImport.m in Sources */,
@@ -708,6 +705,7 @@
 				FCFF080B18FC46890022B444 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				FC431E28190A6B4A00413DD5 /* JWBlurView.m in Sources */,
 				FC5D0045190AC33900928DE0 /* PopUpNavigationViewController.m in Sources */,
+				FC8C0DB01912759B00621839 /* Contact.m in Sources */,
 				FC5D0038190AAC1F00928DE0 /* CallResultViewController.m in Sources */,
 				FCE52F4018F8947300E1AADF /* DetailToCallViewController.m in Sources */,
 				FC5D0041190AB04100928DE0 /* NewContactViewController.m in Sources */,
