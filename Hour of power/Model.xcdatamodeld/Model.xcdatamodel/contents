@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="CallDate" representedClassName="CallDate" syncable="YES">
-        <attribute name="nextCall" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="contact" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="callDate" inverseEntity="Contact" syncable="YES"/>
-    </entity>
     <entity name="Contact" representedClassName="Contact" syncable="YES">
         <attribute name="answered" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="classification" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastCall" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="log" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nCalls" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="nextCall" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="nIntroductions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="callDate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CallDate" inverseName="contact" inverseEntity="CallDate" syncable="YES"/>
+        <attribute name="speakTime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Contact" positionX="-63" positionY="-18" width="117" height="148"/>
-        <element name="CallDate" positionX="117" positionY="-18" width="128" height="73"/>
+        <element name="Contact" positionX="-63" positionY="-18" width="117" height="195"/>
     </elements>
 </model>

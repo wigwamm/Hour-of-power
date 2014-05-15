@@ -8,16 +8,17 @@
 
 #import "CallResultViewController.h"
 
+//DATABASE
 #import "Contact.h"
 
+//POPUP
 #import "MZFormSheetController.h"
 #import "MZFormSheetSegue.h"
 
-#import "CallNoteViewController.h"
+//MANAGE TIME
+#import <NSDate+Calendar.h>
 
-@interface CallResultViewController () <NSFetchedResultsControllerDelegate>
-
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@interface CallResultViewController ()
 
 @end
 
@@ -46,14 +47,17 @@
     NSNumber *indexSection = [[NSUserDefaults standardUserDefaults] objectForKey:@"IndexPathSection"];
     
     index = [NSIndexPath indexPathForItem:[indexRow intValue] inSection:[indexSection intValue]];
-    
-    self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
-                                                    ascending:YES
-                                                withPredicate:nil
-                                                      groupBy:nil
-                                                     delegate:self
-                                                    inContext:[NSManagedObjectContext contextForCurrentThread]];
-    currentContact = [self.fetchedResultsController objectAtIndexPath:index];
+
+    if (index.section == 0) {
+        
+        NSArray *peoples = [Contact findAllSortedBy:@"classification" ascending:NO withPredicate:[NSPredicate predicateWithFormat:@"(nextCall == %@)", [[NSDate date] dateToday]]];
+        currentContact = peoples[index.row];
+        
+    } else if (index.section == 1) {
+        
+        NSArray *peoples = [Contact findAllSortedBy:@"fullName" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"(nextCall > %@)", [[NSDate date] dateToday]]];
+        currentContact = peoples[index.row];
+    }
 }
 
 #pragma mark CallResult

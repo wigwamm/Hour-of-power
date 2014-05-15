@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
+//BLUR VIEW
 #import "JWBlurView.h"
 
-@interface ToCallViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
+@interface ToCallViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *addressTableView;
-
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @property (strong, nonatomic) IBOutlet JWBlurView *blurView;
 

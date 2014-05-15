@@ -11,6 +11,7 @@
 @interface CallNoteViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *classificationSegmentedControl;
+@property (strong, nonatomic) IBOutlet UILabel *nextCallDateLabel;
 @property (strong, nonatomic) IBOutlet UITextView *callNoteTextView;
 @property (strong, nonatomic) IBOutlet UIButton *justSaveButton;
 @property (strong, nonatomic) IBOutlet UIButton *addNewContactButton;

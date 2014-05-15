@@ -109,8 +109,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7jl-Pm-Jck">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7jl-Pm-Jck">
+                                <rect key="frame" x="0.0" y="63" width="320" height="457"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -118,25 +118,28 @@
                                     <outlet property="delegate" destination="CZ4-MO-1fc" id="RpQ-Ly-MMp"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0j-uI-iAL" customClass="TTCounterLabel">
-                                <rect key="frame" x="265" y="63" width="55" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8DA-50-Pff" customClass="JWBlurView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8DA-50-Pff" customClass="JWBlurView">
                                 <rect key="frame" x="0.0" y="480" width="320" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7jl-Pm-Jck" secondAttribute="trailing" id="En1-y2-WFw"/>
+                            <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="8DA-50-Pff" secondAttribute="bottom" id="F1B-Se-TnL"/>
+                            <constraint firstItem="7jl-Pm-Jck" firstAttribute="top" secondItem="s9W-kb-ARv" secondAttribute="bottom" constant="-64" id="GyN-3g-g0e"/>
+                            <constraint firstItem="7jl-Pm-Jck" firstAttribute="leading" secondItem="8DA-50-Pff" secondAttribute="leading" id="L3Q-Xj-Yeg"/>
+                            <constraint firstItem="7jl-Pm-Jck" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" id="StG-a2-oR8"/>
+                            <constraint firstItem="7jl-Pm-Jck" firstAttribute="bottom" secondItem="8DA-50-Pff" secondAttribute="bottom" id="W2j-2i-Imd"/>
+                            <constraint firstItem="8DA-50-Pff" firstAttribute="top" secondItem="2VE-Yg-loa" secondAttribute="top" constant="480" id="Z4V-xp-kPQ"/>
+                            <constraint firstItem="7jl-Pm-Jck" firstAttribute="trailing" secondItem="8DA-50-Pff" secondAttribute="trailing" id="lsl-9C-SRB"/>
+                            <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="7jl-Pm-Jck" secondAttribute="bottom" id="vxL-o0-Pmr"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="To call" image="ToCall" id="u1e-5L-l1D"/>
                     <navigationItem key="navigationItem" id="ggc-2A-atb"/>
                     <connections>
-                        <outlet property="_counterLabel" destination="O0j-uI-iAL" id="ubf-Cn-fl9"/>
                         <outlet property="addressTableView" destination="7jl-Pm-Jck" id="xI4-p6-ZxZ"/>
                         <outlet property="blurView" destination="8DA-50-Pff" id="1h3-ZD-0Ln"/>
                     </connections>
@@ -173,8 +176,15 @@
                                     <action selector="classificationSegmentedAction:" destination="W12-BN-LZ6" eventType="valueChanged" id="ch4-4T-c2D"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next call date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJH-MQ-PFD">
+                                <rect key="frame" x="20" y="114" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vCS-oL-Gxz">
-                                <rect key="frame" x="0.0" y="123" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="143" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="edit_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="eqC-dB-sLE">
@@ -257,13 +267,14 @@
                                 <color key="backgroundColor" red="0.9450981021" green="0.9450981021" blue="0.9450981021" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lc8-gI-d9Z">
-                                <rect key="frame" x="0.0" y="223" width="320" height="232"/>
+                                <rect key="frame" x="0.0" y="243" width="320" height="232"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jft-zU-JLi">
-                                        <rect key="frame" x="20" y="20" width="280" height="30"/>
+                                        <rect key="frame" x="108" y="20" width="192" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5d-K9-xdY">
@@ -291,7 +302,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c0o-47-OWK">
                                         <rect key="frame" x="108" y="82" width="192" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.25116635341969062" green="0.88419759830984601" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.2803209043549133" blue="0.16817002008716087" alpha="0.73999999999999999" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -300,6 +311,13 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone n°:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvM-tJ-ORu">
+                                        <rect key="frame" x="20" y="24" width="80" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -315,6 +333,7 @@
                         <outlet property="containerScrollView" destination="Lc8-gI-d9Z" id="ZN7-ql-dtI"/>
                         <outlet property="lastCallLabel" destination="nAa-aR-Yro" id="yOr-jE-PVw"/>
                         <outlet property="logLabel" destination="ccx-b9-LRB" id="QfK-ID-INF"/>
+                        <outlet property="nextCallDateLabel" destination="oJH-MQ-PFD" id="aKu-Mv-2gO"/>
                         <outlet property="noteNewTextView" destination="c0o-47-OWK" id="0xr-Nc-O5k"/>
                         <outlet property="phoneNumberLabel" destination="jft-zU-JLi" id="WkR-Pw-f0H"/>
                     </connections>
@@ -513,7 +532,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Call note:" translatesAutoresizingMaskIntoConstraints="NO" id="7wd-ZT-Wya">
                                 <rect key="frame" x="20" y="85" width="260" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.25116635339999999" green="0.8841975983" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.28032090440000001" blue="0.16817002010000001" alpha="0.73999999999999999" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -550,6 +569,7 @@
                         <outlet property="callNoteTextView" destination="7wd-ZT-Wya" id="d36-zg-AqN"/>
                         <outlet property="classificationSegmentedControl" destination="BYu-vR-QLV" id="jZY-HB-wa3"/>
                         <outlet property="justSaveButton" destination="dd8-bQ-f4m" id="bXB-C8-ZWa"/>
+                        <outlet property="nextCallDateLabel" destination="qKp-rz-3S0" id="HmF-ve-51y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNL-ez-xA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -578,6 +598,9 @@
                                     <segment title="Q"/>
                                     <segment title="Y"/>
                                 </segments>
+                                <connections>
+                                    <action selector="classificationAction:" destination="r2W-ai-bwb" eventType="valueChanged" id="SPU-If-Tyq"/>
+                                </connections>
                             </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2So-Xr-8c6">
                                 <rect key="frame" x="20" y="20" width="260" height="30"/>
@@ -618,6 +641,7 @@
                     <connections>
                         <outlet property="classificationSegmentedControl" destination="uMe-Na-c1b" id="kfz-cd-Pt5"/>
                         <outlet property="fullNameTextField" destination="7td-Zw-Bih" id="Drd-3h-mLy"/>
+                        <outlet property="nextCallDateLabel" destination="Wnf-1G-tvj" id="Igc-j2-rhj"/>
                         <outlet property="phoneNumberTextField" destination="2So-Xr-8c6" id="ZL6-aI-2OZ"/>
                         <outlet property="saveButton" destination="Ikf-1J-ax3" id="6df-ff-RcJ"/>
                     </connections>

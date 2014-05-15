@@ -8,14 +8,17 @@
 
 #import "CallNoteViewController.h"
 
+//POPUP
 #import "MZFormSheetController.h"
 #import "MZFormSheetSegue.h"
 
+//MANAGE TIME
+#import <NSDate+Calendar.h>
+
+//DATABASE
 #import "Contact.h"
 
-@interface CallNoteViewController () <NSFetchedResultsControllerDelegate>
-
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@interface CallNoteViewController ()
 
 @end
 
@@ -46,14 +49,16 @@
     
     index = [NSIndexPath indexPathForItem:[indexRow intValue] inSection:[indexSection intValue]];
     
-    self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
-                                                    ascending:YES
-                                                withPredicate:nil
-                                                      groupBy:nil
-                                                     delegate:self
-                                                    inContext:[NSManagedObjectContext contextForCurrentThread]];
-    
-    currentContact = [self.fetchedResultsController objectAtIndexPath:index];
+    if (index.section == 0) {
+        
+        NSArray *peoples = [Contact findAllSortedBy:@"classification" ascending:NO withPredicate:[NSPredicate predicateWithFormat:@"(nextCall == %@)", [[NSDate date] dateToday]]];
+        currentContact = peoples[index.row];
+        
+    } else if (index.section == 1) {
+        
+        NSArray *peoples = [Contact findAllSortedBy:@"fullName" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"(nextCall > %@)", [[NSDate date] dateToday]]];
+        currentContact = peoples[index.row];
+    }
     
     [self fillScreen];
 }
@@ -62,26 +67,32 @@
 {
     switch ([currentContact.classification intValue]) {
         case 0:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingDays:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 0;
             break;
             
         case 1:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingWeek:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 1;
             break;
             
         case 2:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingMonth:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 2;
             break;
             
         case 3:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingMonth:4]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 3;
             break;
             
         case 4:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingYear:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 4;
             break;
             
         default:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingDays:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 0;
             break;
     }
@@ -116,12 +127,47 @@
     
     NSLog(@"%li %@", (long)selectedSegmentIndex, selectedSegmentTitle);
     
+    switch (selectedSegmentIndex) {
+        case 0:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingDays:1]]];
+            break;
+            
+        case 1:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingWeek:1]]];
+            break;
+            
+        case 2:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingMonth:1]]];
+            break;
+            
+        case 3:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingMonth:4]]];
+            break;
+            
+        case 4:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingYear:1]]];
+            break;
+            
+        default:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingDays:1]]];
+            break;
+    }
+    
     currentContact.classification = [NSNumber numberWithLong:selectedSegmentIndex];
     
     // Save the modification in the local context
     [[NSManagedObjectContext contextForCurrentThread] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         NSLog(@"Updated classification");
     }];
+}
+
+- (NSString *)stringFromDate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"dd/MM/yyyy";
+    NSString *strngDate = [formatter stringFromDate:date];
+    
+    return strngDate;
 }
 
 - (IBAction)newContact:(id)sender

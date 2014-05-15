@@ -2,17 +2,20 @@ PODS:
   - MZAppearance (1.1.2)
   - MZFormSheetController (2.3.4):
     - MZAppearance (~> 1.1.2)
+  - NSDate+Calendar (0.0.4)
   - ODRefreshControl (1.1.0)
   - TTTAttributedLabel (1.9.4)
 
 DEPENDENCIES:
   - MZFormSheetController
+  - NSDate+Calendar
   - ODRefreshControl
   - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   MZAppearance: 75bc6c786025c311ebc247b01e1dead5cd29f7c5
   MZFormSheetController: e14169b86864f515905e3f2775b4d81a2fa836ac
+  NSDate+Calendar: db9a1a4a03dc1536517c7e41ceb97813f0e0ee76
   ODRefreshControl: 886e323a7c25114b9e5c397a9eefbebc034224a9
   TTTAttributedLabel: 617e14e3590a4afc9bc35dd999eb37e888996f36
 

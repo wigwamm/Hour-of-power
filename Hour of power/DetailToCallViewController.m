@@ -8,9 +8,14 @@
 
 #import "DetailToCallViewController.h"
 
+//POPUP
 #import "MZFormSheetController.h"
 #import "MZFormSheetSegue.h"
 
+//MANAGE TIME
+#import <NSDate+Calendar.h>
+
+//DATABASE
 #import "Contact.h"
 
 @interface DetailToCallViewController () <MZFormSheetBackgroundWindowDelegate>
@@ -53,21 +58,7 @@
     
     self.noteNewTextView.delegate = self;
     
-    [self fetchUser];
-    
     [self fillScreen];
-}
-
-- (void)fetchUser
-{
-    self.fetchedResultsController = [Contact fetchAllSortedBy:@"fullName"
-                                                    ascending:YES
-                                                withPredicate:nil
-                                                      groupBy:nil
-                                                     delegate:self
-                                                    inContext:[NSManagedObjectContext contextForCurrentThread]];
-    
-    currentContact = [fetchedResultsController objectAtIndexPath:self.index];
 }
 
 - (void)addNotifications
@@ -95,36 +86,67 @@
 
 - (void)fillScreen
 {
+    if (self.index.section == 0) {
+        
+        NSArray *peoples = [Contact findAllSortedBy:@"classification" ascending:NO withPredicate:[NSPredicate predicateWithFormat:@"(nextCall == %@)", [[NSDate date] dateToday]]];
+        currentContact = peoples[self.index.row];
+        
+    } else if (self.index.section == 1) {
+        
+        NSArray *peoples = [Contact findAllSortedBy:@"fullName" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"(nextCall > %@)", [[NSDate date] dateToday]]];
+        currentContact = peoples[self.index.row];
+    }
+    
     self.navigationItem.title = currentContact.fullName;
-    self.phoneNumberLabel.text = [NSString stringWithFormat:@"Phone n°: %@", currentContact.phoneNumber];
+    
+    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    
+    self.phoneNumberLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", currentContact.phoneNumber]
+                                                                           attributes:underlineAttribute];
+    
     self.lastCallLabel.text = [NSString stringWithFormat:@"Last call: %@", currentContact.lastCall];
     self.logLabel.text = [NSString stringWithFormat:@"Note: %@", currentContact.log];
     
     switch ([currentContact.classification intValue]) {
         case 0:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingDays:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 0;
             break;
             
         case 1:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingWeek:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 1;
             break;
             
         case 2:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingMonth:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 2;
             break;
             
         case 3:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingMonth:4]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 3;
             break;
             
         case 4:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingYear:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 4;
             break;
             
         default:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingDays:1]]];
             self.classificationSegmentedControl.selectedSegmentIndex = 0;
             break;
     }
+}
+
+- (NSString *)stringFromDate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"dd/MM/yyyy";
+    NSString *strngDate = [formatter stringFromDate:date];
+    
+    return strngDate;
 }
 
 - (IBAction)callNumber:(id)sender
@@ -142,6 +164,32 @@
     NSString *selectedSegmentTitle = [self.classificationSegmentedControl titleForSegmentAtIndex: selectedSegmentIndex];
     
     NSLog(@"%li %@", (long)selectedSegmentIndex, selectedSegmentTitle);
+    
+    switch (selectedSegmentIndex) {
+        case 0:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingDays:1]]];
+            break;
+            
+        case 1:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingWeek:1]]];
+            break;
+            
+        case 2:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingMonth:1]]];
+            break;
+            
+        case 3:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingMonth:4]]];
+            break;
+            
+        case 4:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingYear:1]]];
+            break;
+            
+        default:
+            self.nextCallDateLabel.text = [NSString stringWithFormat:@"Next call: %@", [self stringFromDate:[[[NSDate date] dateToday] dateByAddingDays:1]]];
+            break;
+    }
     
     currentContact.classification = [NSNumber numberWithLong:selectedSegmentIndex];
     
@@ -168,6 +216,16 @@
 }
 
 #pragma mark - PointStuff
+- (void)background
+{
+    NSLog(@"Background");
+    
+    start = [NSDate date];
+    
+    //Show All PopUp
+    [self showPopup];
+}
+
 - (void)foreground
 {
     NSLog(@"Foreground");
@@ -177,16 +235,6 @@
     NSLog(@"Interval: %f", distanceBetweenDates);
     
     [self calculatePointWithTime:distanceBetweenDates];
-}
-
-- (void)background
-{
-    NSLog(@"Background");
-    
-    start = [NSDate date];
-    
-    //Show All PopUp
-    [self showPopup];
 }
 
 - (void)becomeActive
@@ -208,6 +256,11 @@
             NSLog(@"0 point");
         } else {
             NSLog(@"%i point", (int)time*10);
+            
+            // NUMBER POINT TODAY
+            int pointToAdd = (int)time*10;
+            [[NSUserDefaults standardUserDefaults] setInteger:([[[NSUserDefaults standardUserDefaults] objectForKey:@"nPointToday"] integerValue] + pointToAdd) forKey:@"nPointToday"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
 }
@@ -215,7 +268,6 @@
 - (void)showPopup
 {
     UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"popup"];
-    
     MZFormSheetController *formSheet = [[MZFormSheetController alloc] initWithViewController:vc];
     
     formSheet.presentedFormSheetSize = CGSizeMake(300, 298);
@@ -231,13 +283,14 @@
     
     formSheet.willPresentCompletionHandler = ^(UIViewController *presentedFSViewController) {
         // Passing data
-//        UINavigationController *navController = (UINavigationController *)presentedFSViewController;
-//        navController.topViewController.title = @"PASSING DATA";
-//        CallResultViewController *modalVc = (CallResultViewController *)navController.topViewController;
     };
     
     formSheet.didDismissCompletionHandler = ^(UIViewController *presentedFSViewController) {
-        [self fetchUser];
+        
+        // NUMBER CALLS TODAY
+        [[NSUserDefaults standardUserDefaults] setInteger:([[[NSUserDefaults standardUserDefaults] objectForKey:@"nCallsToday"] integerValue] + 1) forKey:@"nCallsToday"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         [self fillScreen];
     };
     
