@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+
+// DATABASE
 #import "Contact.h"
 
 @implementation AppDelegate
@@ -15,16 +17,17 @@
 {
     // Override point for customization after application launch.
     
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont fontWithName:@"Futura" size:18],
-								  NSForegroundColorAttributeName: [UIColor whiteColor] };
-    [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+    //--------- NavigationBar ------------
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:1.000 green:0.600 blue:0.084 alpha:1.000]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSFontAttributeName: [UIFont fontWithName:@"Futura" size:18],
+                                                            NSForegroundColorAttributeName: [UIColor whiteColor] }];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.510 green:0.874 blue:1.000 alpha:1.000]];
     
-    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:0.510 green:0.874 blue:1.000 alpha:1.000]];
+    //---------- TabBar ------------
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:1.000 green:0.600 blue:0.084 alpha:1.000]];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
 //    [[UITabBar appearance] setItemSpacing:20];
@@ -35,28 +38,6 @@
     
     // Setup CoreData with MagicalRecord
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"Model"];
-    
-    // Setup App with prefilled contact.
-//    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"MR_HasPrefilledBeers"]) {
-//        
-//        // Create contact photo
-//        Contact *contact = [Contact createEntity];
-//        contact.fullName = @"Test Test";
-//        contact.phoneNumber = @"333333333";
-//        contact.classification = @1;
-//        contact.unanswered = @NO;
-//        NSDate *currDate = [NSDate date];
-//        contact.lastCall = currDate;
-//        contact.log = @"log";
-//        // Save the modification in the local context
-//        NSError *error = nil;
-//        // Save Managed Object Context
-//        [[NSManagedObjectContext defaultContext] save:&error];
-//        
-//        // Set User Default to prevent another preload of data on startup.
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"MR_HasPrefilledBeers"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
     
     return YES;
 }
@@ -80,7 +61,7 @@
 
 - (void)notify
 {
-    //-------Notify--------
+    //------- Notify -------
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     
     notification.timeZone = [NSTimeZone defaultTimeZone];
@@ -90,7 +71,7 @@
     notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    //---------------------
+    //-----------------------
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
